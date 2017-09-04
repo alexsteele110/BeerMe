@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -10,7 +10,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 
 const styles = {
   root: {
-    marginTop: 30,
+    marginTop: 0,
     width: '100%'
   },
   flex: {
@@ -22,27 +22,31 @@ const styles = {
   }
 };
 
-function Header(props) {
-  const classes = props.classes;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar disableGutters>
-          <IconButton
-            className={classes.menuButton}
-            color="contrast"
-            aria-label="Menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography type="title" color="inherit" className={classes.flex}>
-            Title
-          </Typography>
-          <Button color="contrast">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class Header extends Component {
+  render() {
+    const { root, menuButton, flex } = this.props.classes;
+    return (
+      <div className={root}>
+        <AppBar position="static">
+          <Toolbar disableGutters>
+            <IconButton
+              className={menuButton}
+              color="contrast"
+              aria-label="Menu"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography type="title" color="inherit" className={flex}>
+              BeerMe
+            </Typography>
+            <Button color="contrast" href="/auth/google">
+              Login With Google
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
 Header.propTypes = {
