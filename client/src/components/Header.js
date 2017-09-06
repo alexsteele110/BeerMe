@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -23,6 +24,25 @@ const styles = {
 };
 
 class Header extends Component {
+  renderContent() {
+    switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return (
+          <Button color="contrast" href="/auth/google">
+            Login With Google
+          </Button>
+        );
+      default:
+        return (
+          <Button color="contrast" href="/api/logout">
+            Logout
+          </Button>
+        );
+    }
+  }
+
   render() {
     const { root, menuButton, flex } = this.props.classes;
     return (
@@ -39,9 +59,7 @@ class Header extends Component {
             <Typography type="title" color="inherit" className={flex}>
               BeerMe
             </Typography>
-            <Button color="contrast" href="/auth/google">
-              Login With Google
-            </Button>
+            {this.renderContent()}
           </Toolbar>
         </AppBar>
       </div>
@@ -53,4 +71,8 @@ Header.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Header);
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(Header));
