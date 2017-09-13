@@ -57,7 +57,7 @@ class Header extends Component {
               <MenuIcon />
             </IconButton>
             <Typography type="title" color="inherit" className={flex}>
-              BeerMe
+              BeerMe<i className="material-icons">local_drink</i>
             </Typography>
             {this.renderContent()}
           </Toolbar>
