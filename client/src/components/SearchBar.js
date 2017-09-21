@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { fetchBeers } from '../actions/index';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Input from 'material-ui/Input';
+import Button from 'material-ui/Button';
 
 const styles = theme => ({
   container: {
@@ -24,35 +23,40 @@ class SearchBar extends Component {
     this.state = { term: '' };
 
     this.onInputChange = this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onInputChange(event) {
     this.setState({ term: event.target.value });
   }
 
-  onFormSubmit(event) {
-    event.preventDefault();
-    this.props.fetchBeers(this.state.term);
-    this.setState({ term: '' });
-  }
+  // Add form functionality so pressing enter searches
+  //
+  // extract route params through express to search brewerydb with search term
+  // Have '/search/this.state.term' route display list component of beers
 
   render() {
     const classes = this.props.classes;
     return (
-      <form onSubmit={this.onFormSubmit}>
-        <div className={classes.container}>
-          <Input
-            placeholder="Search beers..."
-            className={classes.input}
-            value={this.state.term}
-            onChange={this.onInputChange}
-            inputProps={{
-              'aria-label': 'Description'
-            }}
-          />
-        </div>
-      </form>
+      <div className={classes.container}>
+        <Input
+          placeholder="Search beers..."
+          className={classes.input}
+          value={this.state.term}
+          onChange={this.onInputChange}
+          inputProps={{
+            'aria-label': 'Description'
+          }}
+        />
+        <Button
+          raised
+          color="primary"
+          className={classes.button}
+          to={`/search/${this.state.term}`}
+          component={Link}
+        >
+          Search
+        </Button>
+      </div>
     );
   }
 }
@@ -61,8 +65,4 @@ SearchBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchBeers }, dispatch);
-}
-
-export default connect(null, mapDispatchToProps)(withStyles(styles)(SearchBar));
+export default withStyles(styles)(SearchBar);
