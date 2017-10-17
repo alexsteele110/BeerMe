@@ -21,7 +21,7 @@ class App extends Component {
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/searchbar" component={SearchBar} />
+            <Route exact path="/doasearch" component={SearchBar} />
           </div>
         </BrowserRouter>
       </div>

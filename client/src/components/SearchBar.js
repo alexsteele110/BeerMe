@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Input from 'material-ui/Input';
 import Button from 'material-ui/Button';
+import { fetchBeers } from '../actions';
 
 const styles = theme => ({
   container: {
@@ -35,6 +37,7 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+    this.props.fetchBeers(this.state.term);
     this.setState({ fireRedirect: true });
   }
 
@@ -60,7 +63,6 @@ class SearchBar extends Component {
           />
           <Button
             raised
-            color="primary"
             className={classes.button}
             to={`/search/${this.state.term}`}
             component={Link}
@@ -78,4 +80,10 @@ SearchBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SearchBar);
+function mapStateToProps({ beers }) {
+  return { beers };
+}
+
+export default connect(mapStateToProps, { fetchBeers })(
+  withStyles(styles)(SearchBar)
+);
