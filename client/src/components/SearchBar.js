@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Input from 'material-ui/Input';
 import Button from 'material-ui/Button';
-import { fetchBeers } from '../actions';
 
 const styles = theme => ({
   container: {
@@ -37,12 +35,8 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.fetchBeers(this.state.term);
     this.setState({ fireRedirect: true });
   }
-
-  // extract route params through express to search brewerydb with search term
-  // Have '/search/this.state.term' route display list component of beers
 
   render() {
     const classes = this.props.classes;
@@ -80,10 +74,4 @@ SearchBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beers }) {
-  return { beers };
-}
-
-export default connect(mapStateToProps, { fetchBeers })(
-  withStyles(styles)(SearchBar)
-);
+export default withStyles(styles)(SearchBar);
