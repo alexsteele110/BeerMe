@@ -9,6 +9,6 @@ export const fetchUser = () => async dispatch => {
 
 export const fetchBeers = beer => async dispatch => {
   const res = await axios.get(`/api/search/${beer}`);
-  console.log(res.data);
+
   dispatch({ type: FETCH_BEERS, payload: res.data });
 };

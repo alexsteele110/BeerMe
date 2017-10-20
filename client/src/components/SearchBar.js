@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchBeers } from '../actions';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Input from 'material-ui/Input';
-import Button from 'material-ui/Button';
+import SearchIcon from 'material-ui-icons/Search';
+import BeersList from './BeersList';
 
 const styles = theme => ({
   container: {
@@ -21,8 +22,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      term: '',
-      fireRedirect: false
+      term: ''
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -35,16 +35,15 @@ class SearchBar extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.setState({ fireRedirect: true });
+    this.props.fetchBeers(this.state.term);
   }
 
   render() {
     const classes = this.props.classes;
-    const { from } = this.props.location.state || '/';
-    const { fireRedirect } = this.state;
 
     return (
       <div className={classes.container}>
+        <SearchIcon />
         <form onSubmit={this.onFormSubmit}>
           <Input
             placeholder="Search beers..."
@@ -55,16 +54,8 @@ class SearchBar extends Component {
               'aria-label': 'Description'
             }}
           />
-          <Button
-            raised
-            className={classes.button}
-            to={`/search/${this.state.term}`}
-            component={Link}
-          >
-            Search
-          </Button>
         </form>
-        {fireRedirect && <Redirect to={from || `/search/${this.state.term}`} />}
+        <BeersList />
       </div>
     );
   }
@@ -74,4 +65,10 @@ SearchBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SearchBar);
+function mapStateToProps({ beers }) {
+  return { beers };
+}
+
+export default connect(mapStateToProps, { fetchBeers })(
+  withStyles(styles)(SearchBar)
+);
