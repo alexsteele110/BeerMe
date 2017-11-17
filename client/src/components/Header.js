@@ -8,6 +8,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
+import SearchBar from './SearchBar';
 
 const styles = {
   root: {
@@ -59,6 +60,7 @@ class Header extends Component {
             <Typography type="title" color="inherit" className={flex}>
               BeerMe<i className="material-icons">local_drink</i>
             </Typography>
+            <SearchBar />
             {this.renderContent()}
           </Toolbar>
         </AppBar>

@@ -5,48 +5,52 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Input from 'material-ui/Input';
 import SearchIcon from 'material-ui-icons/Search';
-import BeersList from './BeersList';
 
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap'
+    marginRight: 34
   },
   input: {
     margin: theme.spacing.unit,
-    width: '50%'
+    width: '100%',
+    backgroundColor: '#7986CB',
+    color: 'white',
+    paddingLeft: 16,
+    '&:hover': {
+      backgroundColor: '#9FA8DA'
+    }
+  },
+  icon: {
+    marginTop: 11,
+    marginLeft: 22
   }
 });
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      term: ''
-    };
+  state = {
+    term: ''
+  };
 
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-  }
-
-  onInputChange(event) {
+  onInputChange = event => {
     this.setState({ term: event.target.value });
-  }
+  };
 
-  onFormSubmit(event) {
+  onFormSubmit = event => {
     event.preventDefault();
     this.props.fetchBeers(this.state.term);
-  }
+  };
 
   render() {
     const classes = this.props.classes;
 
     return (
       <div className={classes.container}>
-        <SearchIcon />
+        <SearchIcon className={classes.icon} />
         <form onSubmit={this.onFormSubmit}>
           <Input
             placeholder="Search beers..."
+            disableUnderline={true}
             className={classes.input}
             value={this.state.term}
             onChange={this.onInputChange}
@@ -55,7 +59,6 @@ class SearchBar extends Component {
             }}
           />
         </form>
-        <BeersList />
       </div>
     );
   }
