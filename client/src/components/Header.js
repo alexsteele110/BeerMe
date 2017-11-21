@@ -12,7 +12,7 @@ import SearchBar from './SearchBar';
 
 const styles = {
   root: {
-    marginTop: 0,
+    height: 60,
     width: '100%'
   },
   flex: {
@@ -48,7 +48,7 @@ class Header extends Component {
     const { root, menuButton, flex } = this.props.classes;
     return (
       <div className={root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar disableGutters>
             <IconButton
               className={menuButton}

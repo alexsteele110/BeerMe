@@ -14,11 +14,11 @@ const styles = theme => ({
   input: {
     margin: theme.spacing.unit,
     width: '100%',
-    backgroundColor: '#7986CB',
+    backgroundColor: '#78909C',
     color: 'white',
     paddingLeft: 16,
     '&:hover': {
-      backgroundColor: '#9FA8DA'
+      backgroundColor: '#90A4AE'
     }
   },
   icon: {

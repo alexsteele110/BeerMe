@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
@@ -16,9 +17,9 @@ const styles = theme => ({
   card: {
     display: 'flex',
     justifyContent: 'flex-start',
+    backgroundColor: '#ECEFF1',
     '&:hover': {
-      boxShadow: theme.shadows[6],
-      cursor: 'pointer'
+      boxShadow: theme.shadows[6]
     }
   },
   details: {
@@ -39,6 +40,7 @@ class BeersList extends Component {
   renderContent = () => {
     const { classes, beers } = this.props;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
+
     if (beers.length === 0) {
       return (
         <div>
@@ -49,23 +51,25 @@ class BeersList extends Component {
     return beers.map(beer => {
       return (
         <Grid item xs={12} key={beer.id}>
-          <Card className={classes.card}>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography type="headline">
-                  {beer.name}
-                </Typography>
-                <Typography type="subheading" color="secondary">
-                  {beer.style.name}
-                </Typography>
-              </CardContent>
-            </div>
-            <CardMedia
-              className={classes.cover}
-              image={beer.labels ? beer.labels.medium : altImage}
-              alt="hello"
-            />
-          </Card>
+          <Link to={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
+            <Card className={classes.card}>
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography type="headline">
+                    {beer.name}
+                  </Typography>
+                  <Typography type="subheading" color="secondary">
+                    {beer.style.name}
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                className={classes.cover}
+                image={beer.labels ? beer.labels.medium : altImage}
+                alt="hello"
+              />
+            </Card>
+          </Link>
         </Grid>
       );
     });
@@ -74,7 +78,7 @@ class BeersList extends Component {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <Grid container spacing={16}>
+        <Grid container spacing={24}>
           {this.renderContent()}
         </Grid>
       </div>
