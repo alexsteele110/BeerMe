@@ -11,8 +11,9 @@ module.exports = app => {
     axios
       .get(url)
       .then(response => {
-        console.log(response.data.data[0]);
-        res.send(response.data.data[0]);
+        const results = response.data.data.slice(0, 12);
+        console.log(results);
+        res.send(results);
       })
       .catch(error => {
         console.log(error);
