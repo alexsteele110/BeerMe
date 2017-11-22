@@ -13,7 +13,6 @@ const styles = theme => ({
     margin: 0
   },
   paper: {
-    backgroundColor: '#ECEFF1',
     padding: 24,
     height: 400
   },
@@ -56,7 +55,7 @@ function CenteredGrid(props) {
               mundi consul. Eam at modo aliquam veritus.
             </Typography>
           </Paper>
-          <Button className={classes.button} fab color="primary">
+          <Button className={classes.button} fab color="accent">
             <KeyboardArrowDownIcon />
           </Button>
         </Grid>

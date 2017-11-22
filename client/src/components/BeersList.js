@@ -16,7 +16,6 @@ const styles = theme => ({
   card: {
     display: 'flex',
     justifyContent: 'flex-start',
-    backgroundColor: '#ECEFF1',
     '&:hover': {
       boxShadow: theme.shadows[6]
     }
