@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
+import Chip from 'material-ui/Chip';
+import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 60,
-    marginLeft: '35%',
-    marginRight: '5%'
+    margin: 60
   },
   card: {
     display: 'flex',
@@ -50,26 +50,31 @@ class BeersList extends Component {
     }
     return beers.map(beer => {
       return (
-        <Grid item xs={12} key={beer.id}>
-          <Link to={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
-            <Card className={classes.card}>
-              <div className={classes.details}>
-                <CardContent className={classes.content}>
-                  <Typography type="headline">
-                    {beer.name}
-                  </Typography>
-                  <Typography type="subheading" color="secondary">
-                    {beer.style.name}
-                  </Typography>
-                </CardContent>
-              </div>
-              <CardMedia
-                className={classes.cover}
-                image={beer.labels ? beer.labels.medium : altImage}
-                alt="hello"
-              />
-            </Card>
-          </Link>
+        <Grid container spacing={24}>
+          <Grid item xs={12} key={beer.id}>
+            <Link to={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
+              <Card className={classes.card}>
+                <div className={classes.details}>
+                  <CardContent className={classes.content}>
+                    <Typography type="headline">
+                      {beer.name}
+                    </Typography>
+                    <Typography type="subheading" color="secondary">
+                      {beer.style.shortName}
+                    </Typography>
+                    <Typography type="body1" color="secondary">
+                      <b>Brewed by:</b> {beer.breweries[0].name}
+                    </Typography>
+                  </CardContent>
+                </div>
+                <CardMedia
+                  className={classes.cover}
+                  image={beer.labels ? beer.labels.medium : altImage}
+                  alt="hello"
+                />
+              </Card>
+            </Link>
+          </Grid>
         </Grid>
       );
     });
@@ -79,7 +84,12 @@ class BeersList extends Component {
     return (
       <div className={this.props.classes.root}>
         <Grid container spacing={24}>
-          {this.renderContent()}
+          <Grid item xs={4}>
+            <Paper style={{ height: '501' }}>Filters Here</Paper>
+          </Grid>
+          <Grid item xs={8}>
+            {this.renderContent()}
+          </Grid>
         </Grid>
       </div>
     );
