@@ -21,8 +21,7 @@ module.exports = app => {
 
   app.get('/api/beer/:beerId', (req, res) => {
     const beerId = req.params.beerId;
-    const url = `${ROOT_URL}beer/${beerId}?key=${keys.breweryKey}`;
-    console.log(url);
+    const url = `${ROOT_URL}beer/${beerId}?key=${keys.breweryKey}&withBreweries=Y`;
 
     axios
       .get(url)

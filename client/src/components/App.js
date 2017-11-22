@@ -5,6 +5,7 @@ import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 import BeersList from './BeersList';
+import BeerDetails from './BeerDetails';
 
 const Dashboard = () => <h2>Dashboard</h2>;
 
@@ -20,8 +21,9 @@ class App extends Component {
           <div>
             <Header />
             <Route exact path="/" component={Landing} />
-            <Route exact path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/search" component={BeersList} />
+            <Route path="/beer/:beerId" component={BeerDetails} />
           </div>
         </BrowserRouter>
       </div>

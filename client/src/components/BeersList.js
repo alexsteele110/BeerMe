@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
-import Chip from 'material-ui/Chip';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
@@ -50,8 +49,8 @@ class BeersList extends Component {
     }
     return beers.map(beer => {
       return (
-        <Grid container spacing={24}>
-          <Grid item xs={12} key={beer.id}>
+        <Grid container spacing={24} key={beer.id}>
+          <Grid item xs={12}>
             <Link to={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
               <Card className={classes.card}>
                 <div className={classes.details}>
@@ -85,7 +84,7 @@ class BeersList extends Component {
       <div className={this.props.classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={4}>
-            <Paper style={{ height: '501' }}>Filters Here</Paper>
+            <Paper style={{ height: 501 }}>Filters Here</Paper>
           </Grid>
           <Grid item xs={8}>
             {this.renderContent()}
