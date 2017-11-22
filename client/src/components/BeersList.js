@@ -11,8 +11,8 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     marginTop: 60,
-    marginLeft: '20%',
-    marginRight: '20%'
+    marginLeft: '35%',
+    marginRight: '5%'
   },
   card: {
     display: 'flex',

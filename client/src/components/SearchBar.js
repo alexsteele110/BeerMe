@@ -49,7 +49,7 @@ class SearchBar extends Component {
         <SearchIcon className={classes.icon} />
         <form onSubmit={this.onFormSubmit}>
           <Input
-            placeholder="Search beers..."
+            placeholder="Search..."
             disableUnderline={true}
             className={classes.input}
             value={this.state.term}
