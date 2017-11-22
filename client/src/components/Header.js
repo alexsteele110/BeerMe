@@ -60,7 +60,7 @@ class Header extends Component {
             <Typography type="title" color="inherit" className={flex}>
               BeerMe<i className="material-icons">local_drink</i>
             </Typography>
-            <SearchBar />
+            <SearchBar location={this.props.location.pathname} />
             {this.renderContent()}
           </Toolbar>
         </AppBar>

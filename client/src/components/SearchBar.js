@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchBeers } from '../actions';
 import PropTypes from 'prop-types';
@@ -29,7 +30,13 @@ const styles = theme => ({
 
 class SearchBar extends Component {
   state = {
-    term: ''
+    term: '',
+    fireRedirect: false
+  };
+
+  componentWillReceiveProps = () => {
+    this.setState({ fireRedirect: false });
+    console.log('hi');
   };
 
   onInputChange = event => {
@@ -39,6 +46,7 @@ class SearchBar extends Component {
   onFormSubmit = event => {
     event.preventDefault();
     this.props.fetchBeers(this.state.term);
+    this.setState({ fireRedirect: true });
   };
 
   render() {
@@ -59,6 +67,9 @@ class SearchBar extends Component {
             }}
           />
         </form>
+        {this.state.fireRedirect && this.props.location !== '/search'
+          ? <Redirect to={'/search'} />
+          : ''}
       </div>
     );
   }

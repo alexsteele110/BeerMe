@@ -14,12 +14,13 @@ class App extends Component {
     this.props.fetchUser();
   }
 
+  // Made header a route in order to access this.props.location
   render() {
     return (
       <div>
         <BrowserRouter>
           <div>
-            <Header />
+            <Route path="/" component={Header} />
             <Route exact path="/" component={Landing} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/search" component={BeersList} />

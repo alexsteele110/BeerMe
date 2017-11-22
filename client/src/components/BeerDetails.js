@@ -16,15 +16,16 @@ import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import red from 'material-ui/colors/red';
 import FavoriteIcon from 'material-ui-icons/Favorite';
-import ShareIcon from 'material-ui-icons/Share';
+import NoteAddIcon from 'material-ui-icons/NoteAdd';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
 const styles = theme => ({
   card: {
-    maxWidth: 400
+    maxWidth: 512,
+    margin: 40
   },
   media: {
-    height: 194
+    height: 512
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -53,7 +54,7 @@ class BeerDetails extends React.Component {
 
   handleExpandClick = () => {
     this.setState({ expanded: !this.state.expanded });
-    console.log(this.props.beerDetails);
+    console.log(this.props);
   };
 
   renderContent = () => {
@@ -67,12 +68,12 @@ class BeerDetails extends React.Component {
           <Card className={classes.card}>
             <CardHeader
               avatar={
-                <Avatar aria-label="Recipe" className={classes.avatar}>
-                  R
+                <Avatar aria-label="Beer" className={classes.avatar}>
+                  B
                 </Avatar>
               }
               title={data.name}
-              subheader="September 14, 2016"
+              subheader={data.breweries[0].name}
             />
             <CardMedia
               className={classes.media}
@@ -89,7 +90,7 @@ class BeerDetails extends React.Component {
                 <FavoriteIcon />
               </IconButton>
               <IconButton aria-label="Share">
-                <ShareIcon />
+                <NoteAddIcon />
               </IconButton>
               <div className={classes.flexGrow} />
               <IconButton
