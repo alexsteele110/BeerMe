@@ -7,12 +7,14 @@ import App from './components/App';
 import reducers from './reducers';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import blueGrey from 'material-ui/colors/blueGrey';
+import lightBlue from 'material-ui/colors/lightBlue';
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 const theme = createMuiTheme({
   palette: {
-    primary: blueGrey
+    primary: blueGrey,
+    secondary: lightBlue
   }
 });
 

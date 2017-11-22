@@ -1,38 +1,37 @@
 import React from 'react';
-import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+import KeyboardArrowDownIcon from 'material-ui-icons/KeyboardArrowDown';
+import Typography from 'material-ui/Typography';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    margin: 0
   },
   paper: {
-    padding: 16,
-    position: 'relative',
-    color: theme.palette.text.secondary,
-    top: -250,
-    width: '75%',
-    marginLeft: '11%',
-    height: 800,
-    backgroundColor: '#ECEFF1'
-  },
-  button: {
-    margin: theme.spacing.unit
+    backgroundColor: '#ECEFF1',
+    padding: 24,
+    height: 400
   },
   banner: {
-    width: '100%'
+    padding: 136,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    backgroundColor: '#263238',
+    height: 200
+  },
+  button: {
+    float: 'right',
+    right: '8%',
+    top: -30
   },
   greeting: {
-    alignContent: 'center',
-    color: '#ECEFF1',
-    position: 'relative',
-    top: -300,
-    left: 175,
-    margin: 10
+    color: 'white',
+    textDecoration: 'bold'
   }
 });
 
@@ -41,22 +40,56 @@ function CenteredGrid(props) {
 
   return (
     <div className={classes.root}>
-      <img className={classes.banner} src="https://i.imgur.com/igjgHce.jpg" />
-      <Typography className={classes.greeting} type="display3">
-        Discover new beers
-      </Typography>
-      <Typography className={classes.greeting} type="headline">
-        Lorem ipsum dolor sit amet, debet dissentias nec in.
-      </Typography>
-      <Button className={classes.greeting} raised color="primary">
-        Get Started
-      </Button>
-      <Button className={classes.greeting} raised color="accent">
-        Register Now
-      </Button>
-      <Grid container spacing={16}>
+      <Grid container justify="center" spacing={24}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>Welcome to the site.</Paper>
+          <Paper className={classes.banner}>
+            <Typography
+              className={classes.greeting}
+              type="display4"
+              gutterBottom
+            >
+              BeerMe
+            </Typography>
+            <Typography className={classes.greeting} type="headline">
+              Lorem ipsum dolor sit amet, in stet omnis periculis quo, vim nulla
+              persius an. Ius an sint omnesque. Ad eos pertinax pericula, vis in
+              mundi consul. Eam at modo aliquam veritus.
+            </Typography>
+          </Paper>
+          <Button className={classes.button} fab color="primary">
+            <KeyboardArrowDownIcon />
+          </Button>
+        </Grid>
+
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>
+            <Typography type="body1">
+              Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
+              adipisci quaerendum an quo, in nec purto maluisset incorrupte.
+              Virtute civibus iracundia pro id, maiorum recusabo convenire vim
+              ad.
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>
+            <Typography type="body1">
+              Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
+              adipisci quaerendum an quo, in nec purto maluisset incorrupte.
+              Virtute civibus iracundia pro id, maiorum recusabo convenire vim
+              ad.
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>
+            <Typography type="body1">
+              Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
+              adipisci quaerendum an quo, in nec purto maluisset incorrupte.
+              Virtute civibus iracundia pro id, maiorum recusabo convenire vim
+              ad.
+            </Typography>
+          </Paper>
         </Grid>
       </Grid>
     </div>
