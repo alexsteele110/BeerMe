@@ -61,7 +61,8 @@ class BeersList extends Component {
                       {beer.style.shortName}
                     </Typography>
                     <Typography type="body1" color="secondary">
-                      <b>Brewed by:</b> {beer.breweries[0].name}
+                      <b>Brewed by:</b>{' '}
+                      {beer.breweries ? beer.breweries[0].name : 'Unavailable'}
                     </Typography>
                   </CardContent>
                 </div>

@@ -59,6 +59,7 @@ class BeerDetails extends React.Component {
 
   renderContent = () => {
     const reqStatus = this.props.beerDetails.status;
+    const altImage = 'https://i.imgur.com/YrNKcpR.png';
     const { data } = this.props.beerDetails;
     const { classes } = this.props;
 
@@ -77,7 +78,7 @@ class BeerDetails extends React.Component {
             />
             <CardMedia
               className={classes.media}
-              image={data.labels.large}
+              image={data.labels ? data.labels.large : altImage}
               title={data.name}
             />
             <CardContent>
