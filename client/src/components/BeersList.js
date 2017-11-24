@@ -7,6 +7,7 @@ import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
+import { CircularProgress } from 'material-ui/Progress';
 
 const styles = theme => ({
   root: {
@@ -39,14 +40,15 @@ class BeersList extends Component {
     const { classes, beers } = this.props;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
 
-    if (beers.length === 0) {
-      return (
-        <div>
-          <h3>No content yet</h3>
-        </div>
-      );
+    if (beers.isFetching) {
+      return <CircularProgress />;
     }
-    return beers.map(beer => {
+
+    if (beers.items.length === 0) {
+      return <Typography type="headline">No results.</Typography>;
+    }
+
+    return beers.items.map(beer => {
       return (
         <Grid container spacing={24} key={beer.id}>
           <Grid item xs={12}>

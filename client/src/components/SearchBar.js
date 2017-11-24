@@ -30,13 +30,7 @@ const styles = theme => ({
 
 class SearchBar extends Component {
   state = {
-    term: '',
-    fireRedirect: false
-  };
-
-  componentWillReceiveProps = () => {
-    this.setState({ fireRedirect: false });
-    console.log('hi');
+    term: ''
   };
 
   onInputChange = event => {
@@ -46,7 +40,6 @@ class SearchBar extends Component {
   onFormSubmit = event => {
     event.preventDefault();
     this.props.fetchBeers(this.state.term);
-    this.setState({ fireRedirect: true });
   };
 
   render() {
@@ -67,7 +60,7 @@ class SearchBar extends Component {
             }}
           />
         </form>
-        {this.state.fireRedirect && this.props.location !== '/search'
+        {this.props.beers.fireRedirect && this.props.location !== '/search'
           ? <Redirect to={'/search'} />
           : ''}
       </div>

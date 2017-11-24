@@ -11,6 +11,11 @@ module.exports = app => {
     axios
       .get(url)
       .then(response => {
+        // API counts an empty search as a success. Checking for no data
+        // and then returning an empty array to represent no results
+        if (!response.data.data) {
+          res.send([]);
+        }
         const results = response.data.data.slice(0, 12);
         res.send(results);
       })

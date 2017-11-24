@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -58,7 +59,7 @@ class Header extends Component {
               <MenuIcon />
             </IconButton>
             <Typography type="title" color="inherit" className={flex}>
-              BeerMe<i className="material-icons">local_drink</i>
+              <Link to="/">BeerMe</Link>
             </Typography>
             <SearchBar location={this.props.location.pathname} />
             {this.renderContent()}
