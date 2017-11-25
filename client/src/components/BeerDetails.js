@@ -49,7 +49,7 @@ class BeerDetails extends React.Component {
   state = { expanded: false };
 
   componentDidMount = () => {
-    const beerId = this.props.match.params.beerId;
+    const { beerId } = this.props.match.params;
     this.props.fetchBeerDetails(beerId);
   };
 

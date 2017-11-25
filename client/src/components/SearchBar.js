@@ -17,14 +17,17 @@ const styles = theme => ({
     width: '100%',
     backgroundColor: '#78909C',
     color: 'white',
-    paddingLeft: 16,
+    paddingLeft: 36,
     '&:hover': {
       backgroundColor: '#90A4AE'
     }
   },
   icon: {
     marginTop: 11,
-    marginLeft: 22
+    marginLeft: 22,
+    left: 39,
+    position: 'relative',
+    zIndex: 1500
   }
 });
 
@@ -41,7 +44,7 @@ class SearchBar extends Component {
   };
 
   render() {
-    const classes = this.props.classes;
+    const { classes, location } = this.props;
 
     return (
       <div className={classes.container}>
@@ -58,7 +61,7 @@ class SearchBar extends Component {
             }}
           />
         </form>
-        {this.props.beers.fireRedirect && this.props.location !== '/search'
+        {this.props.beers.fireRedirect && location !== '/search'
           ? <Redirect to={'/search'} />
           : ''}
       </div>

@@ -30,8 +30,8 @@ const styles = theme => ({
     flex: '1 0 auto'
   },
   cover: {
-    width: 100,
-    height: 100
+    width: 120,
+    height: 120
   }
 });
 

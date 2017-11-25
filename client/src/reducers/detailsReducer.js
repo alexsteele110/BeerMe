@@ -8,14 +8,16 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_BEER_DETAILS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: true
-      });
+      };
     case RECEIVE_BEER_DETAILS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         isFetching: false,
         info: action.payload
-      });
+      };
     default:
       return state;
   }
