@@ -50,7 +50,7 @@ class Header extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, location } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -67,7 +67,7 @@ class Header extends Component {
                 BeerMe
               </Link>
             </Typography>
-            <SearchBar location={this.props.location.pathname} />
+            <SearchBar location={location.pathname} />
             {this.renderContent()}
           </Toolbar>
         </AppBar>
