@@ -55,7 +55,7 @@ function CenteredGrid(props) {
               mundi consul. Eam at modo aliquam veritus.
             </Typography>
           </Paper>
-          <Button className={classes.button} fab color="accent">
+          <Button className={classes.button} fab color="primary">
             <KeyboardArrowDownIcon />
           </Button>
         </Grid>

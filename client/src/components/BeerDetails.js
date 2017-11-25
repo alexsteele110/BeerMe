@@ -14,6 +14,7 @@ import Collapse from 'material-ui/transitions/Collapse';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
+import { CircularProgress } from 'material-ui/Progress';
 import red from 'material-ui/colors/red';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import NoteAddIcon from 'material-ui-icons/NoteAdd';
@@ -54,16 +55,19 @@ class BeerDetails extends React.Component {
 
   handleExpandClick = () => {
     this.setState({ expanded: !this.state.expanded });
-    console.log(this.props);
   };
 
   renderContent = () => {
-    const reqStatus = this.props.beerDetails.status;
+    const { status, data } = this.props.beerDetails.info;
+    const { isFetching } = this.props.beerDetails;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
-    const { data } = this.props.beerDetails;
     const { classes } = this.props;
 
-    if (reqStatus === 'success') {
+    if (isFetching) {
+      return <CircularProgress />;
+    }
+
+    if (status === 'success') {
       return (
         <div>
           <Card className={classes.card}>

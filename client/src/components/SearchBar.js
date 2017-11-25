@@ -29,9 +29,7 @@ const styles = theme => ({
 });
 
 class SearchBar extends Component {
-  state = {
-    term: ''
-  };
+  state = { term: '' };
 
   onInputChange = event => {
     this.setState({ term: event.target.value });

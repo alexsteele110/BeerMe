@@ -22,6 +22,10 @@ const styles = {
   menuButton: {
     marginLeft: 12,
     marginRight: 20
+  },
+  logo: {
+    textDecoration: 'none',
+    color: 'white'
   }
 };
 
@@ -46,20 +50,22 @@ class Header extends Component {
   }
 
   render() {
-    const { root, menuButton, flex } = this.props.classes;
+    const { classes } = this.props;
     return (
-      <div className={root}>
+      <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar disableGutters>
             <IconButton
-              className={menuButton}
+              className={classes.menuButton}
               color="contrast"
               aria-label="Menu"
             >
               <MenuIcon />
             </IconButton>
-            <Typography type="title" color="inherit" className={flex}>
-              <Link to="/">BeerMe</Link>
+            <Typography type="title" color="inherit" className={classes.flex}>
+              <Link to="/" className={classes.logo}>
+                BeerMe
+              </Link>
             </Typography>
             <SearchBar location={this.props.location.pathname} />
             {this.renderContent()}
