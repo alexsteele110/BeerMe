@@ -14,7 +14,7 @@ const styles = theme => ({
   },
   input: {
     margin: theme.spacing.unit,
-    width: '100%',
+    width: '80%',
     backgroundColor: '#78909C',
     color: 'white',
     paddingLeft: 36,

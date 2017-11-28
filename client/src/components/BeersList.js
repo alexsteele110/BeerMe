@@ -18,7 +18,7 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'flex-start',
     '&:hover': {
-      boxShadow: theme.shadows[6]
+      boxShadow: theme.shadows[4]
     }
   },
   details: {

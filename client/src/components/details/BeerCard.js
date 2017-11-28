@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBeerDetails } from '../actions';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Card, { CardMedia, CardContent, CardActions } from 'material-ui/Card';
+import Card, {
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions
+} from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import { CircularProgress } from 'material-ui/Progress';
-import FavoriteIcon from 'material-ui-icons/Favorite';
-import ReviewForm from './ReviewForm';
+import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
+import ReviewForm from '../ReviewForm';
 
 const styles = theme => ({
   card: {
@@ -20,23 +24,14 @@ const styles = theme => ({
   }
 });
 
-class BeerDetails extends React.Component {
-  state = { expanded: false };
-
-  componentDidMount = () => {
-    const { beerId } = this.props.match.params;
-    this.props.fetchBeerDetails(beerId);
-  };
-
-  handleExpandClick = () => {
-    this.setState({ expanded: !this.state.expanded });
-  };
-
+class BeerDetails extends Component {
   renderContent = () => {
     const { status, data } = this.props.beerDetails.info;
     const { isFetching } = this.props.beerDetails;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
     const { classes } = this.props;
+
+    console.log(this.props.beerDetails);
 
     if (isFetching) {
       return <CircularProgress />;
@@ -45,26 +40,21 @@ class BeerDetails extends React.Component {
     if (status === 'success') {
       return (
         <div>
-          <Card className={classes.card}>
+          <Card>
+            <CardHeader title={data.name} subheader={data.breweries[0].name} />
             <CardMedia
               className={classes.media}
               image={data.labels ? data.labels.large : altImage}
               title={data.name}
             />
             <CardContent>
-              <Typography type="headline" component="h2">
-                {data.name}
-              </Typography>
-              <Typography type="subheading" gutterBottom>
-                {data.breweries[0].name}
-              </Typography>
               <Typography type="body1">
                 {data.description}
               </Typography>
             </CardContent>
             <CardActions>
               <IconButton>
-                <FavoriteIcon />
+                <FavoriteBorderIcon />
               </IconButton>
               <ReviewForm />
             </CardActions>
@@ -91,6 +81,4 @@ function mapStateToProps({ beerDetails }) {
   return { beerDetails };
 }
 
-export default connect(mapStateToProps, { fetchBeerDetails })(
-  withStyles(styles)(BeerDetails)
-);
+export default connect(mapStateToProps)(withStyles(styles)(BeerDetails));
