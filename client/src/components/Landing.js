@@ -5,12 +5,19 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import KeyboardArrowDownIcon from 'material-ui-icons/KeyboardArrowDown';
+import FavoriteIcon from 'material-ui-icons/Favorite';
+import RateReviewIcon from 'material-ui-icons/RateReview';
+import FindInPageIcon from 'material-ui-icons/FindInPage';
 import Typography from 'material-ui/Typography';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 0
+    margin: 0,
+    [theme.breakpoints.up('lg')]: {
+      margin: '12%',
+      marginTop: 40
+    }
   },
   paper: {
     padding: 24,
@@ -20,10 +27,13 @@ const styles = theme => ({
     padding: 136,
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    backgroundColor: '#263238',
-    height: 200
+    background: 'url(https://i.imgur.com/5utcnvd.png)',
+    height: 360
   },
   button: {
+    margin: theme.spacing.unit
+  },
+  fab: {
     float: 'right',
     right: '8%',
     top: -30
@@ -31,6 +41,19 @@ const styles = theme => ({
   greeting: {
     color: 'white',
     textDecoration: 'bold'
+  },
+  largeIcon: {
+    height: 120,
+    width: 120,
+    color: '#263238',
+    display: 'block',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginBottom: 6
+  },
+  container: {
+    padding: 50,
+    textAlign: 'center'
   }
 });
 
@@ -54,41 +77,56 @@ function CenteredGrid(props) {
               persius an. Ius an sint omnesque. Ad eos pertinax pericula, vis in
               mundi consul. Eam at modo aliquam veritus.
             </Typography>
+            <Button className={classes.button} raised color="inherit">
+              Get Started
+            </Button>
           </Paper>
-          <Button className={classes.button} fab color="primary">
+          <Button className={classes.fab} fab color="primary">
             <KeyboardArrowDownIcon />
           </Button>
         </Grid>
 
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>
+        <Grid item sm={12} md={4}>
+          <div className={classes.container}>
+            <FavoriteIcon className={classes.largeIcon} />
+            <Typography type="headline" gutterBottom>
+              <b>Favorite</b>
+            </Typography>
             <Typography type="body1">
               Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
               adipisci quaerendum an quo, in nec purto maluisset incorrupte.
               Virtute civibus iracundia pro id, maiorum recusabo convenire vim
               ad.
             </Typography>
-          </Paper>
+          </div>
         </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>
+        <Grid item sm={12} md={4}>
+          <div className={classes.container}>
+            <RateReviewIcon className={classes.largeIcon} />
+            <Typography type="headline" gutterBottom>
+              <b>Review</b>
+            </Typography>
             <Typography type="body1">
               Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
               adipisci quaerendum an quo, in nec purto maluisset incorrupte.
               Virtute civibus iracundia pro id, maiorum recusabo convenire vim
               ad.
             </Typography>
-          </Paper>
+          </div>
         </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>
+        <Grid item sm={12} md={4}>
+          <div className={classes.container}>
+            <FindInPageIcon className={classes.largeIcon} />
+            <Typography type="headline" gutterBottom>
+              <b>Search</b>
+            </Typography>
             <Typography type="body1">
               Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
               adipisci quaerendum an quo, in nec purto maluisset incorrupte.
               Virtute civibus iracundia pro id, maiorum recusabo convenire vim
               ad.
             </Typography>
-          </Paper>
+          </div>
         </Grid>
       </Grid>
     </div>

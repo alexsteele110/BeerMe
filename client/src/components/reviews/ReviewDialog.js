@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import NoteAddIcon from 'material-ui-icons/NoteAdd';
-import TextField from 'material-ui/TextField';
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle
 } from 'material-ui/Dialog';
+import ReviewForm from './ReviewForm';
 
-class ReviewForm extends Component {
+class ReviewDialog extends Component {
   state = {
     open: false
   };
@@ -36,17 +36,10 @@ class ReviewForm extends Component {
               Submit your overall rating, along with a description of what you
               did and did not like about this beer.
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Email Address"
-              type="email"
-              fullWidth
-            />
+            <ReviewForm />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="error">
+            <Button onClick={this.handleRequestClose} color="contrast">
               Cancel
             </Button>
             <Button onClick={this.handleRequestClose} color="primary">
@@ -59,4 +52,4 @@ class ReviewForm extends Component {
   }
 }
 
-export default ReviewForm;
+export default ReviewDialog;

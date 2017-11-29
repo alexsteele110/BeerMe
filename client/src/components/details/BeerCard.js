@@ -12,7 +12,7 @@ import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import { CircularProgress } from 'material-ui/Progress';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
-import ReviewForm from '../ReviewForm';
+import ReviewDialog from '../reviews/ReviewDialog';
 
 const styles = theme => ({
   card: {
@@ -56,7 +56,7 @@ class BeerDetails extends Component {
               <IconButton>
                 <FavoriteBorderIcon />
               </IconButton>
-              <ReviewForm />
+              <ReviewDialog />
             </CardActions>
           </Card>
         </div>
