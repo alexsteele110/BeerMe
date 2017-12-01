@@ -1,48 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
+import { Field, reduxForm } from 'redux-form';
 
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  menu: {
-    width: 200
-  }
-});
-
-class TextFields extends React.Component {
-  state = {
-    review: ''
-  };
-
-  handleChange = event => {
-    this.setState({ review: event.target.value });
-  };
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <form className={classes.container}>
-        <TextField
-          label="Review"
-          value={this.state.review}
-          onChange={this.handleChange}
-          margin="normal"
-          fullWidth
-          multiline
-          rows="4"
-        />
-      </form>
-    );
-  }
-}
-
-TextFields.propTypes = {
-  classes: PropTypes.object.isRequired
+const ReviewForm = props => {
+  const { handleSubmit, pristine, reset, submitting } = props;
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Notes</label>
+        <div>
+          <Field name="notes" component="textarea" />
+        </div>
+      </div>
+      <div>
+        <button type="submit" disabled={pristine || submitting}>
+          Submit
+        </button>
+        <button type="button" disabled={pristine || submitting} onClick={reset}>
+          Clear Values
+        </button>
+      </div>
+    </form>
+  );
 };
 
-export default withStyles(styles)(TextFields);
+export default reduxForm({
+  form: 'review'
+})(ReviewForm);

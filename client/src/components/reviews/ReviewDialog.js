@@ -16,6 +16,10 @@ class ReviewDialog extends Component {
     open: false
   };
 
+  submit = values => {
+    console.log(values);
+  };
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -40,7 +44,7 @@ class ReviewDialog extends Component {
               Submit your overall rating, along with a description of what you
               did and did not like about this beer.
             </DialogContentText>
-            <ReviewForm />
+            <ReviewForm onSubmit={this.submit} />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleRequestClose} color="contrast">
