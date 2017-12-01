@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import Divider from 'material-ui/Divider';
 import KeyboardArrowDownIcon from 'material-ui-icons/KeyboardArrowDown';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import RateReviewIcon from 'material-ui-icons/RateReview';
@@ -45,7 +46,6 @@ const styles = theme => ({
   largeIcon: {
     height: 120,
     width: 120,
-    color: '#263238',
     display: 'block',
     marginRight: 'auto',
     marginLeft: 'auto',
@@ -88,11 +88,14 @@ function CenteredGrid(props) {
 
         <Grid item sm={12} md={4}>
           <div className={classes.container}>
-            <FavoriteIcon className={classes.largeIcon} />
+            <FavoriteIcon
+              style={{ color: '#C95353' }}
+              className={classes.largeIcon}
+            />
             <Typography type="headline" gutterBottom>
               <b>Favorite</b>
             </Typography>
-            <Typography type="body1">
+            <Typography type="subheading">
               Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
               adipisci quaerendum an quo, in nec purto maluisset incorrupte.
               Virtute civibus iracundia pro id, maiorum recusabo convenire vim
@@ -102,11 +105,14 @@ function CenteredGrid(props) {
         </Grid>
         <Grid item sm={12} md={4}>
           <div className={classes.container}>
-            <RateReviewIcon className={classes.largeIcon} />
+            <RateReviewIcon
+              style={{ color: '#3E997E' }}
+              className={classes.largeIcon}
+            />
             <Typography type="headline" gutterBottom>
               <b>Review</b>
             </Typography>
-            <Typography type="body1">
+            <Typography type="subheading">
               Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
               adipisci quaerendum an quo, in nec purto maluisset incorrupte.
               Virtute civibus iracundia pro id, maiorum recusabo convenire vim
@@ -116,11 +122,14 @@ function CenteredGrid(props) {
         </Grid>
         <Grid item sm={12} md={4}>
           <div className={classes.container}>
-            <FindInPageIcon className={classes.largeIcon} />
+            <FindInPageIcon
+              style={{ color: '#6BB3CD' }}
+              className={classes.largeIcon}
+            />
             <Typography type="headline" gutterBottom>
               <b>Search</b>
             </Typography>
-            <Typography type="body1">
+            <Typography type="subheading">
               Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu. Dicat
               adipisci quaerendum an quo, in nec purto maluisset incorrupte.
               Virtute civibus iracundia pro id, maiorum recusabo convenire vim
@@ -128,7 +137,23 @@ function CenteredGrid(props) {
             </Typography>
           </div>
         </Grid>
+        <Grid item sm={12} md={4}>
+          <div className={classes.container}>
+            <img height="100" src="https://i.imgur.com/Yr7LVd0.png" alt="" />
+          </div>
+        </Grid>
+        <Grid item sm={12} md={4}>
+          <div className={classes.container}>
+            <img height="150" src="https://i.imgur.com/6KmeQpG.png" alt="" />
+          </div>
+        </Grid>
+        <Grid item sm={12} md={4}>
+          <div className={classes.container}>
+            <img height="80" src="https://i.imgur.com/BqVae5B.png" alt="" />
+          </div>
+        </Grid>
       </Grid>
+      <Divider />
     </div>
   );
 }

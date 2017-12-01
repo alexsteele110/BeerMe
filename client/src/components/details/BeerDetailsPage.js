@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchBeerDetails } from '../../actions';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import { CircularProgress } from 'material-ui/Progress';
 import Grid from 'material-ui/Grid';
 import BeerCard from './BeerCard';
 import BeerSecondaryCard from './BeerSecondaryCard';
@@ -12,10 +13,8 @@ const styles = theme => ({
     flexGrow: 1,
     margin: 30
   },
-  paper: {
-    padding: 16,
-    textAlign: 'center',
-    color: theme.palette.text.secondary
+  progress: {
+    margin: '30% 50%'
   }
 });
 
@@ -25,18 +24,39 @@ class BeerDetailsPage extends Component {
     this.props.fetchBeerDetails(beerId);
   };
 
-  render() {
+  renderContent = () => {
+    const { status } = this.props.beerDetails.info;
+    const { isFetching } = this.props.beerDetails;
     const { classes } = this.props;
+
+    if (isFetching) {
+      return (
+        <div>
+          <CircularProgress className={classes.progress} size={100} />
+        </div>
+      );
+    }
+
+    if (status === 'success') {
+      return (
+        <div className={classes.root}>
+          <Grid container spacing={24}>
+            <Grid item xs={12} sm={6}>
+              <BeerCard />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <BeerSecondaryCard />
+            </Grid>
+          </Grid>
+        </div>
+      );
+    }
+  };
+
+  render() {
     return (
-      <div className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={12} sm={6}>
-            <BeerCard />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <BeerSecondaryCard />
-          </Grid>
-        </Grid>
+      <div>
+        {this.renderContent()}
       </div>
     );
   }
@@ -46,6 +66,10 @@ BeerDetailsPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(null, { fetchBeerDetails })(
+function mapStateToProps({ beerDetails }) {
+  return { beerDetails };
+}
+
+export default connect(mapStateToProps, { fetchBeerDetails })(
   withStyles(styles)(BeerDetailsPage)
 );
