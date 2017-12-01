@@ -11,10 +11,10 @@ import BeerSecondaryCard from './BeerSecondaryCard';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: '2% 8%'
+    margin: '4% 8%'
   },
   progress: {
-    margin: '30% 50%'
+    margin: '25% 50%'
   }
 });
 
@@ -40,11 +40,11 @@ class BeerDetailsPage extends Component {
     if (status === 'success') {
       return (
         <div className={classes.root}>
-          <Grid container spacing={24}>
+          <Grid container justify="space-between" spacing={24}>
             <Grid item xs={12} sm={5}>
               <BeerCard />
             </Grid>
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} sm={6}>
               <BeerSecondaryCard />
             </Grid>
           </Grid>

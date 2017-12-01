@@ -23,7 +23,7 @@ const styles = theme => ({
     margin: 100
   },
   media: {
-    height: 412
+    height: 312
   },
   chip: {
     margin: theme.spacing.unit,

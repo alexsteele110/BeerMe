@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
+import Card, { CardContent, CardMedia } from 'material-ui/Card';
+import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
@@ -11,8 +12,15 @@ const styles = theme => ({
   },
   paper: {
     padding: 16,
-    textAlign: 'center',
+    textAlign: 'left',
     color: theme.palette.text.secondary
+  },
+  card: {
+    maxWidth: 340,
+    marginTop: 30
+  },
+  media: {
+    height: 200
   }
 });
 
@@ -25,29 +33,36 @@ class BeerSecondaryCard extends Component {
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              abv: {data.abv}
-            </Paper>
+            <Typography type="display2" gutterBottom>
+              Classification
+            </Typography>
+            <Typography type="headline" gutterBottom>
+              {data.style.name}
+            </Typography>
+            <br />
+            <Typography type="subheading">
+              {data.style.description}
+            </Typography>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>
-              Recommended glass: data dot glass dot name
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>
-              Organic?: {data.isOrganic}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>
-              Type: {data.style.name}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>
-              Type description: {data.style.description}
-            </Paper>
+
+          <Grid item xs={12}>
+            <Typography type="display2">Ideal glass</Typography>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                image="https://i.imgur.com/FlRGHy3.jpg"
+              />
+              <CardContent>
+                <Typography type="headline" component="h2">
+                  {data.glass.name}
+                </Typography>
+                <Typography component="p">
+                  A short-stemmed glass with a wide bottom and narrow top.
+                  Typically used for spirits like bourbon and brandy, it is also
+                  the correct choice for many beers over 8% ABV.
+                </Typography>
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       </div>
