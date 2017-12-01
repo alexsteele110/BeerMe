@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 import Card, {
   CardHeader,
@@ -8,9 +9,12 @@ import Card, {
   CardContent,
   CardActions
 } from 'material-ui/Card';
+import Collapse from 'material-ui/transitions/Collapse';
 import IconButton from 'material-ui/IconButton';
+import Chip from 'material-ui/Chip';
 import Typography from 'material-ui/Typography';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
+import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import ReviewDialog from '../reviews/ReviewDialog';
 
 const styles = theme => ({
@@ -19,15 +23,44 @@ const styles = theme => ({
     margin: 100
   },
   media: {
-    height: 512
+    height: 412
+  },
+  chip: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.primary[700],
+    color: 'white'
+  },
+  row: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap'
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  },
+  flexGrow: {
+    flex: '1 1 auto'
   }
 });
 
 class BeerDetails extends Component {
+  state = { expanded: false };
+
+  handleExpandClick = () => {
+    this.setState({ expanded: !this.state.expanded });
+  };
+
   render() {
     const { data } = this.props.beerDetails.info;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
     const { classes } = this.props;
+    console.log(data);
 
     return (
       <div>
@@ -39,16 +72,39 @@ class BeerDetails extends Component {
             title={data.name}
           />
           <CardContent>
-            <Typography type="body1">
-              {data.description}
-            </Typography>
+            <div className={classes.row}>
+              <Chip className={classes.chip} label={`ABV: ${data.abv}%`} />
+              <Chip className={classes.chip} label={`IBU: ${data.ibu}`} />
+              <Chip
+                className={classes.chip}
+                label={`Organic: ${data.isOrganic}`}
+              />
+            </div>
           </CardContent>
           <CardActions>
             <IconButton>
               <FavoriteBorderIcon />
             </IconButton>
             <ReviewDialog />
+            <div className={classes.flexGrow} />
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
           </CardActions>
+          <Collapse in={this.state.expanded} timeout={700} unmountOnExit>
+            <CardContent>
+              <Typography type="body1">
+                {data.description}
+              </Typography>
+            </CardContent>
+          </Collapse>
         </Card>
       </div>
     );

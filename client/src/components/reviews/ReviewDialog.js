@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
-import NoteAddIcon from 'material-ui-icons/NoteAdd';
+import RateReviewIcon from 'material-ui-icons/RateReview';
+import Tooltip from 'material-ui/Tooltip';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -26,9 +27,12 @@ class ReviewDialog extends Component {
   render() {
     return (
       <div>
-        <IconButton onClick={this.handleClickOpen}>
-          <NoteAddIcon />
-        </IconButton>
+        <Tooltip title="Add Review" placement="right">
+          <IconButton onClick={this.handleClickOpen}>
+            <RateReviewIcon />
+          </IconButton>
+        </Tooltip>
+
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>Add a Review</DialogTitle>
           <DialogContent>
