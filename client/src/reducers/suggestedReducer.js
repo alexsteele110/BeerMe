@@ -4,7 +4,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  state: [],
+  items: [],
   isFetching: false
 };
 
@@ -19,7 +19,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        items: action.payload
+        items: action.payload.data
       };
     default:
       return state;

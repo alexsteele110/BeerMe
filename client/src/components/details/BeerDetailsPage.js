@@ -5,8 +5,12 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
 import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
+import Divider from 'material-ui/Divider';
 import BeerCard from './BeerCard';
-import BeerSecondaryCard from './BeerSecondaryCard';
+import BeerClassification from './BeerClassification';
+import BeersList from '../BeersList';
+import GlassDetails from './GlassDetails';
 
 const styles = theme => ({
   root: {
@@ -24,7 +28,6 @@ class BeerDetailsPage extends Component {
     await this.props.fetchBeerDetails(beerId);
 
     const { styleId } = this.props.beerDetails.info.data;
-    console.log(styleId);
     await this.props.fetchSuggestedBeers(styleId);
   };
 
@@ -49,7 +52,20 @@ class BeerDetailsPage extends Component {
               <BeerCard />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <BeerSecondaryCard />
+              <BeerClassification />
+            </Grid>
+            <Grid item xs={12}>
+              <Divider />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Typography type="display2" gutterBottom>
+                Similar beers:
+              </Typography>
+              <BeersList listType="suggested" />
+            </Grid>
+            <Grid item xs={12} sm={5}>
+              <GlassDetails />
             </Grid>
           </Grid>
         </div>
@@ -70,8 +86,8 @@ BeerDetailsPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beerDetails }) {
-  return { beerDetails };
+function mapStateToProps({ beerDetails, suggested }) {
+  return { beerDetails, suggested };
 }
 
 export default connect(mapStateToProps, {

@@ -41,7 +41,7 @@ module.exports = app => {
 
   app.get('/api/suggested/:styleId', (req, res) => {
     const styleId = req.params.styleId;
-    const url = `${ROOT_URL}beers/?key=${keys.breweryKey}&styleId=${styleId}&order=random&randomCount=3/`;
+    const url = `${ROOT_URL}beers/?key=${keys.breweryKey}&styleId=${styleId}&hasLabels=Y&withBreweries=Y&order=random&randomCount=3/`;
 
     axios
       .get(url)
