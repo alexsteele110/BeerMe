@@ -36,18 +36,19 @@ const styles = theme => ({
 
 class BeersList extends Component {
   renderContent = () => {
-    const { classes, beers } = this.props;
+    const { classes, listType } = this.props;
+    const list = this.props[listType];
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
 
-    if (beers.isFetching) {
+    if (list.isFetching) {
       return <CircularProgress />;
     }
 
-    if (beers.items.length === 0) {
+    if (list.items.length === 0) {
       return <Typography type="headline">No results. Try again.</Typography>;
     }
 
-    return beers.items.map(beer => {
+    return list.items.map(beer => {
       return (
         <Grid container spacing={24} key={beer.id}>
           <Grid item xs={12}>
@@ -94,8 +95,8 @@ BeersList.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beers }) {
-  return { beers };
+function mapStateToProps({ beers, suggested }) {
+  return { beers, suggested };
 }
 
 export default withStyles(styles, { withTheme: true })(

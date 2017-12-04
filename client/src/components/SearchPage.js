@@ -27,7 +27,7 @@ function SearchPage(props) {
           <Paper className={classes.paper}>Filters component</Paper>
         </Grid>
         <Grid item xs={8}>
-          <BeersList />
+          <BeersList listType="beers" />
         </Grid>
       </Grid>
     </div>
