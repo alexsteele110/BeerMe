@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBeerDetails } from '../../actions';
+import { fetchBeerDetails, fetchSuggestedBeers } from '../../actions';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
@@ -11,7 +11,7 @@ import BeerSecondaryCard from './BeerSecondaryCard';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: '4% 8%'
+    margin: '5%'
   },
   progress: {
     margin: '25% 50%'
@@ -19,9 +19,13 @@ const styles = theme => ({
 });
 
 class BeerDetailsPage extends Component {
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const { beerId } = this.props.match.params;
-    this.props.fetchBeerDetails(beerId);
+    await this.props.fetchBeerDetails(beerId);
+
+    const { styleId } = this.props.beerDetails.info.data;
+    console.log(styleId);
+    await this.props.fetchSuggestedBeers(styleId);
   };
 
   renderContent = () => {
@@ -70,6 +74,7 @@ function mapStateToProps({ beerDetails }) {
   return { beerDetails };
 }
 
-export default connect(mapStateToProps, { fetchBeerDetails })(
-  withStyles(styles)(BeerDetailsPage)
-);
+export default connect(mapStateToProps, {
+  fetchBeerDetails,
+  fetchSuggestedBeers
+})(withStyles(styles)(BeerDetailsPage));

@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import { withStyles } from 'material-ui/styles';
 import { Field, reduxForm } from 'redux-form';
 import Rating from 'react-rating';
 import StarBorderIcon from 'material-ui-icons/StarBorder';
 import StarIcon from 'material-ui-icons/Star';
+
+const styles = theme => ({
+  star: {
+    color: '#EC8C19'
+  }
+});
 
 class ReviewForm extends Component {
   state = { starRating: 0 };
@@ -13,13 +20,13 @@ class ReviewForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, pristine, reset, submitting, classes } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <Field name="rating" type="hidden" component="input" />
         <Rating
-          empty={<StarBorderIcon />}
-          full={<StarIcon />}
+          empty={<StarBorderIcon className={classes.star} />}
+          full={<StarIcon className={classes.star} />}
           onClick={rate => {
             this.changeRate('rating', rate);
           }}
@@ -49,6 +56,8 @@ class ReviewForm extends Component {
   }
 }
 
-export default reduxForm({
+ReviewForm = reduxForm({
   form: 'review'
 })(ReviewForm);
+
+export default withStyles(styles)(ReviewForm);

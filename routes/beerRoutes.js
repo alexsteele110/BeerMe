@@ -38,4 +38,22 @@ module.exports = app => {
         console.log(error);
       });
   });
+
+  app.get('/api/suggested/:styleId', (req, res) => {
+    const styleId = req.params.styleId;
+    const url = `${ROOT_URL}beers/?key=${keys.breweryKey}&styleId=${styleId}&order=random&randomCount=3/`;
+
+    axios
+      .get(url)
+      .then(response => {
+        const results = response.data;
+        res.send(results);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  });
 };
+
+// Sends back 5 random beers of certain style
+// `${ROOT_URL}beers/?key=${keys.breweryKey}&styleId=1&order=random&randomCount=5/`

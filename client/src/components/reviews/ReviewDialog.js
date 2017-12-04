@@ -38,11 +38,10 @@ class ReviewDialog extends Component {
         </Tooltip>
 
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-          <DialogTitle>Add a Review</DialogTitle>
+          <DialogTitle>Review Beer</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Submit your overall rating, along with a description of what you
-              did and did not like about this beer.
+              Submit your overall rating along with some praises and criticisms.
             </DialogContentText>
             <ReviewForm onSubmit={this.submit} />
           </DialogContent>
