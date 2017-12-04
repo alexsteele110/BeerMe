@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import { CircularProgress } from 'material-ui/Progress';
@@ -45,7 +44,7 @@ class BeersList extends Component {
     }
 
     if (beers.items.length === 0) {
-      return <Typography type="headline">No results.</Typography>;
+      return <Typography type="headline">No results. Try again.</Typography>;
     }
 
     return beers.items.map(beer => {
@@ -83,15 +82,8 @@ class BeersList extends Component {
 
   render() {
     return (
-      <div className={this.props.classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={4}>
-            <Paper style={{ height: 501 }}>Filters Here</Paper>
-          </Grid>
-          <Grid item xs={8}>
-            {this.renderContent()}
-          </Grid>
-        </Grid>
+      <div>
+        {this.renderContent()}
       </div>
     );
   }
