@@ -85,7 +85,7 @@ class BeerDetails extends Component {
             <IconButton>
               <FavoriteBorderIcon />
             </IconButton>
-            <ReviewDialog />
+            <ReviewDialog beerId={data.id} />
             <div className={classes.flexGrow} />
             <IconButton
               className={classnames(classes.expand, {

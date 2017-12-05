@@ -38,3 +38,9 @@ export const fetchSuggestedBeers = styleId => async dispatch => {
 
   dispatch({ type: RECEIVE_SUGGESTED_BEERS, payload: res.data });
 };
+
+export const submitReview = values => async dispatch => {
+  const res = await axios.post('/api/reviews', values);
+
+  dispatch({ type: FETCH_USER, payload: res.data });
+};

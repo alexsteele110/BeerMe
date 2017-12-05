@@ -33,9 +33,9 @@ class ReviewForm extends Component {
           initialRate={this.state.starRating}
         />
         <div>
-          <label>Notes</label>
+          <label>Review</label>
           <div>
-            <Field name="notes" component="textarea" />
+            <Field name="description" component="textarea" />
           </div>
         </div>
 

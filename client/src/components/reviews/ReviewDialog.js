@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { submitReview } from '../../actions';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import RateReviewIcon from 'material-ui-icons/RateReview';
@@ -17,7 +19,10 @@ class ReviewDialog extends Component {
   };
 
   submit = values => {
-    console.log(values);
+    const { beerId } = this.props;
+    const review = Object.assign({ beerId }, values);
+
+    this.props.submitReview(review);
   };
 
   handleClickOpen = () => {
@@ -59,4 +64,4 @@ class ReviewDialog extends Component {
   }
 }
 
-export default ReviewDialog;
+export default connect(null, { submitReview })(ReviewDialog);
