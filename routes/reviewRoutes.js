@@ -6,7 +6,6 @@ const Review = mongoose.model('reviews');
 module.exports = app => {
   app.post('/api/reviews', requireLogin, async (req, res) => {
     const { beerId, rating, description } = req.body;
-
     const review = new Review({
       beerId,
       rating,

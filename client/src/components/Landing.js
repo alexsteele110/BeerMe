@@ -123,7 +123,7 @@ function CenteredGrid(props) {
         <Grid item sm={12} md={4}>
           <div className={classes.container}>
             <FindInPageIcon
-              style={{ color: '#6BB3CD' }}
+              style={{ color: '#4668B2' }}
               className={classes.largeIcon}
             />
             <Typography type="headline" gutterBottom>

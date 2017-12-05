@@ -54,6 +54,3 @@ module.exports = app => {
       });
   });
 };
-
-// Sends back 5 random beers of certain style
-// `${ROOT_URL}beers/?key=${keys.breweryKey}&styleId=1&order=random&randomCount=5/`
