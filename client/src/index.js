@@ -9,6 +9,9 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import blueGrey from 'material-ui/colors/blueGrey';
 import lightGreen from 'material-ui/colors/lightGreen';
 
+import axios from 'axios';
+window.axios = axios;
+
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 const theme = createMuiTheme({

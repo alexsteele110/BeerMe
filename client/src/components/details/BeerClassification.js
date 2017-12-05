@@ -8,18 +8,6 @@ import Grid from 'material-ui/Grid';
 const styles = theme => ({
   root: {
     flexGrow: 1
-  },
-  paper: {
-    padding: 16,
-    textAlign: 'left',
-    color: theme.palette.text.secondary
-  },
-  card: {
-    maxWidth: 340,
-    marginTop: 30
-  },
-  media: {
-    height: 200
   }
 });
 
