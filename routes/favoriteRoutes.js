@@ -4,8 +4,9 @@ const requireLogin = require('../middlewares/requireLogin');
 const User = mongoose.model('users');
 
 module.exports = app => {
-  app.post('/api/favorites', requireLogin, async (req, res) => {
-    const { beerId } = req.body;
+  // Able to reduce repetitive code here?
+  app.post('/api/favorites/:beerId', requireLogin, async (req, res) => {
+    const { beerId } = req.params;
     const inFavorites = req.user.favoriteBeers.includes(beerId);
 
     if (inFavorites) {

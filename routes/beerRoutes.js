@@ -5,8 +5,8 @@ const ROOT_URL = 'http://api.brewerydb.com/v2/';
 
 module.exports = app => {
   app.get('/api/search/:keyword', (req, res) => {
-    const keywordName = req.params.keyword;
-    const url = `${ROOT_URL}search?key=${keys.breweryKey}&type=beer&withBreweries=Y&q=${keywordName}`;
+    const { keyword } = req.params;
+    const url = `${ROOT_URL}search?key=${keys.breweryKey}&type=beer&withBreweries=Y&q=${keyword}`;
 
     axios
       .get(url)
@@ -25,7 +25,7 @@ module.exports = app => {
   });
 
   app.get('/api/beer/:beerId', (req, res) => {
-    const beerId = req.params.beerId;
+    const { beerId } = req.params;
     const url = `${ROOT_URL}beer/${beerId}?key=${keys.breweryKey}&withBreweries=Y`;
 
     axios
@@ -40,7 +40,7 @@ module.exports = app => {
   });
 
   app.get('/api/suggested/:styleId', (req, res) => {
-    const styleId = req.params.styleId;
+    const { styleId } = req.params;
     const url = `${ROOT_URL}beers/?key=${keys.breweryKey}&styleId=${styleId}&hasLabels=Y&withBreweries=Y&order=random&randomCount=3/`;
 
     axios

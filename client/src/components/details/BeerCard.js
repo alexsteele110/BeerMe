@@ -13,9 +13,9 @@ import Collapse from 'material-ui/transitions/Collapse';
 import IconButton from 'material-ui/IconButton';
 import Chip from 'material-ui/Chip';
 import Typography from 'material-ui/Typography';
-import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import ReviewDialog from '../reviews/ReviewDialog';
+import SnackbarAlert from '../SnackbarAlert';
 
 const styles = theme => ({
   card: {
@@ -49,10 +49,11 @@ const styles = theme => ({
   }
 });
 
-class BeerDetails extends Component {
+class BeerCard extends Component {
   state = { expanded: false };
 
   handleExpandClick = () => {
+    console.log(this.props);
     this.setState({ expanded: !this.state.expanded });
   };
 
@@ -60,7 +61,6 @@ class BeerDetails extends Component {
     const { data } = this.props.beerDetails.info;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
     const { classes } = this.props;
-    console.log(data);
 
     return (
       <div>
@@ -82,9 +82,7 @@ class BeerDetails extends Component {
             </div>
           </CardContent>
           <CardActions>
-            <IconButton>
-              <FavoriteBorderIcon />
-            </IconButton>
+            <SnackbarAlert />
             <ReviewDialog beerId={data.id} />
             <div className={classes.flexGrow} />
             <IconButton
@@ -111,12 +109,12 @@ class BeerDetails extends Component {
   }
 }
 
-BeerDetails.propTypes = {
+BeerCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beerDetails }) {
-  return { beerDetails };
+function mapStateToProps({ beerDetails, auth }) {
+  return { beerDetails, auth };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(BeerDetails));
+export default connect(mapStateToProps)(withStyles(styles)(BeerCard));
