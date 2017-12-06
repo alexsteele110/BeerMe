@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateFavorites } from '../actions';
 import Snackbar from 'material-ui/Snackbar';
+import Tooltip from 'material-ui/Tooltip';
 import IconButton from 'material-ui/IconButton';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import FavoriteIcon from 'material-ui-icons/Favorite';
@@ -12,9 +13,9 @@ class SimpleSnackbar extends Component {
   };
 
   handleClick = async () => {
-    const { id } = this.props.beerDetails.info.data;
-
-    await this.props.updateFavorites(id);
+    const { data } = this.props.beerDetails.info;
+    console.log(data);
+    await this.props.updateFavorites(data);
     this.setState({ open: true });
   };
 
@@ -37,9 +38,15 @@ class SimpleSnackbar extends Component {
   render() {
     return (
       <div>
-        <IconButton onClick={this.handleClick}>
-          {this.decideContent(<FavoriteIcon />, <FavoriteBorderIcon />)}
-        </IconButton>
+        <Tooltip
+          title="Add/remove favorite"
+          placement="bottom"
+          enterDelay={300}
+        >
+          <IconButton onClick={this.handleClick}>
+            {this.decideContent(<FavoriteIcon />, <FavoriteBorderIcon />)}
+          </IconButton>
+        </Tooltip>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',

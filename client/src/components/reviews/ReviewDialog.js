@@ -36,7 +36,7 @@ class ReviewDialog extends Component {
   render() {
     return (
       <div>
-        <Tooltip title="Add Review" placement="right">
+        <Tooltip title="Add Review" placement="bottom" enterDelay={300}>
           <IconButton onClick={this.handleClickOpen}>
             <RateReviewIcon />
           </IconButton>
