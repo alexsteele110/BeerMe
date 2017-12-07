@@ -53,7 +53,6 @@ class BeerCard extends Component {
   state = { expanded: false };
 
   handleExpandClick = () => {
-    console.log(this.props);
     this.setState({ expanded: !this.state.expanded });
   };
 

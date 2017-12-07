@@ -42,7 +42,7 @@ module.exports = app => {
 
     try {
       const response = await axios.get(url);
-      res.send(response.data);
+      res.send(response.data.data);
     } catch (err) {
       res.send(err);
     }

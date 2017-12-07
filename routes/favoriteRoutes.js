@@ -39,4 +39,10 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
+
+  app.get('/api/favorites', requireLogin, async (req, res) => {
+    const favorites = await Favorite.find({ _user: req.user.id });
+
+    res.send(favorites);
+  });
 };

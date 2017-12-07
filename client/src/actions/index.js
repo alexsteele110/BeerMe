@@ -46,7 +46,15 @@ export const submitReview = values => async dispatch => {
 };
 
 export const updateFavorites = data => async dispatch => {
-  const res = await axios.post(`/api/favorites`, data);
+  const res = await axios.post('/api/favorites', data);
 
   dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+export const fetchFavorites = () => async dispatch => {
+  dispatch({ type: FETCH_SUGGESTED_BEERS });
+
+  const res = await axios.get('/api/favorites');
+
+  dispatch({ type: RECEIVE_SUGGESTED_BEERS, payload: res.data });
 };

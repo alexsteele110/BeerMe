@@ -14,7 +14,7 @@ class SimpleSnackbar extends Component {
 
   handleClick = async () => {
     const { data } = this.props.beerDetails.info;
-    console.log(data);
+
     await this.props.updateFavorites(data);
     this.setState({ open: true });
   };

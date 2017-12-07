@@ -19,7 +19,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        items: action.payload.data
+        items: action.payload
       };
     default:
       return state;

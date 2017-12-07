@@ -23,13 +23,13 @@ const styles = theme => ({
 });
 
 class BeerDetailsPage extends Component {
-  componentDidMount = async () => {
+  async componentDidMount() {
     const { beerId } = this.props.match.params;
     await this.props.fetchBeerDetails(beerId);
 
     const { styleId } = this.props.beerDetails.info.data;
     await this.props.fetchSuggestedBeers(styleId);
-  };
+  }
 
   renderContent = () => {
     const { status } = this.props.beerDetails.info;

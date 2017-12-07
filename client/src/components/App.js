@@ -6,8 +6,7 @@ import Header from './Header';
 import Landing from './Landing';
 import SearchPage from './SearchPage';
 import BeerDetailsPage from './details/BeerDetailsPage';
-
-const Dashboard = () => <h2>Dashboard</h2>;
+import DashboardPage from './dashboard/DashboardPage';
 
 class App extends Component {
   componentDidMount() {
@@ -22,7 +21,7 @@ class App extends Component {
           <div>
             <Route path="/" component={Header} />
             <Route exact path="/" component={Landing} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard" component={DashboardPage} />
             <Route path="/search" component={SearchPage} />
             <Route path="/beer/:beerId" component={BeerDetailsPage} />
           </div>
