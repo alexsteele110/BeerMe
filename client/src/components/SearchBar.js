@@ -39,8 +39,10 @@ class SearchBar extends Component {
   };
 
   onFormSubmit = event => {
-    event.preventDefault();
-    this.props.fetchBeers(this.state.term);
+    if (this.state.term !== '') {
+      event.preventDefault();
+      this.props.fetchBeers(this.state.term);
+    }
   };
 
   render() {

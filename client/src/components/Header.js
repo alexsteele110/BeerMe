@@ -7,9 +7,8 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
 import SearchBar from './SearchBar';
+import AccountAvatar from './AccountAvatar';
 
 const styles = {
   root: {
@@ -18,10 +17,6 @@ const styles = {
   },
   flex: {
     flex: 1
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 20
   },
   logo: {
     textDecoration: 'none',
@@ -41,11 +36,7 @@ class Header extends Component {
           </Button>
         );
       default:
-        return (
-          <Button color="contrast" href="/api/logout">
-            Logout
-          </Button>
-        );
+        return <AccountAvatar />;
     }
   }
 
@@ -55,19 +46,13 @@ class Header extends Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar disableGutters>
-            <IconButton
-              className={classes.menuButton}
-              color="contrast"
-              aria-label="Menu"
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography type="title" color="inherit" className={classes.flex}>
               <Link to="/" className={classes.logo}>
                 BeerMe
               </Link>
             </Typography>
             <SearchBar location={location.pathname} />
+
             {this.renderContent()}
           </Toolbar>
         </AppBar>

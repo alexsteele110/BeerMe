@@ -50,32 +50,30 @@ class BeersList extends Component {
 
     return list.items.map(beer => {
       return (
-        <Grid container spacing={24} key={beer.id}>
-          <Grid item xs={12}>
-            <Link to={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
-              <Card className={classes.card}>
-                <div className={classes.details}>
-                  <CardContent className={classes.content}>
-                    <Typography type="headline">
-                      {beer.name}
-                    </Typography>
-                    <Typography type="subheading" color="secondary">
-                      {beer.style.shortName}
-                    </Typography>
-                    <Typography type="body1" color="secondary">
-                      <b>Brewed by:</b>{' '}
-                      {beer.breweries ? beer.breweries[0].name : 'Unavailable'}
-                    </Typography>
-                  </CardContent>
-                </div>
-                <CardMedia
-                  className={classes.cover}
-                  image={beer.labels ? beer.labels.medium : altImage}
-                  alt="hello"
-                />
-              </Card>
-            </Link>
-          </Grid>
+        <Grid item xs={12} key={beer.id}>
+          <Link to={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
+            <Card className={classes.card}>
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Typography type="headline">
+                    {beer.name}
+                  </Typography>
+                  <Typography type="subheading" color="secondary">
+                    {beer.style.shortName}
+                  </Typography>
+                  <Typography type="body1" color="secondary">
+                    <b>Brewed by:</b>{' '}
+                    {beer.breweries ? beer.breweries[0].name : 'Unavailable'}
+                  </Typography>
+                </CardContent>
+              </div>
+              <CardMedia
+                className={classes.cover}
+                image={beer.labels ? beer.labels.medium : altImage}
+                alt="hello"
+              />
+            </Card>
+          </Link>
         </Grid>
       );
     });
@@ -83,9 +81,9 @@ class BeersList extends Component {
 
   render() {
     return (
-      <div>
+      <Grid container spacing={24}>
         {this.renderContent()}
-      </div>
+      </Grid>
     );
   }
 }
