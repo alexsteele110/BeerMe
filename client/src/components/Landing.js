@@ -57,7 +57,7 @@ const styles = theme => ({
   }
 });
 
-function CenteredGrid(props) {
+function Landing(props) {
   const { classes } = props;
 
   return (
@@ -65,17 +65,11 @@ function CenteredGrid(props) {
       <Grid container justify="center" spacing={24}>
         <Grid item xs={12}>
           <Paper className={classes.banner}>
-            <Typography
-              className={classes.greeting}
-              type="display4"
-              gutterBottom
-            >
+            <Typography className={classes.greeting} type="display4">
               BeerMe
             </Typography>
-            <Typography className={classes.greeting} type="headline">
-              Lorem ipsum dolor sit amet, in stet omnis periculis quo, vim nulla
-              persius an. Ius an sint omnesque. Ad eos pertinax pericula, vis in
-              mundi consul. Eam at modo aliquam veritus.
+            <Typography className={classes.greeting} type="display1">
+              Serving all of your beer and brewery needs.
             </Typography>
             <Button className={classes.button} raised color="inherit">
               Get Started
@@ -158,8 +152,8 @@ function CenteredGrid(props) {
   );
 }
 
-CenteredGrid.propTypes = {
+Landing.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(CenteredGrid);
+export default withStyles(styles)(Landing);

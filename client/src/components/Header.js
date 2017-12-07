@@ -19,6 +19,7 @@ const styles = {
     flex: 1
   },
   logo: {
+    marginLeft: 20,
     textDecoration: 'none',
     color: 'white'
   }

@@ -62,11 +62,11 @@ class AccountAvatar extends Component {
               aria-haspopup="true"
               onClick={this.handleClick}
             >
-              A
+              AS
             </Avatar>
           </Target>
           <Popper
-            placement="bottom-start"
+            placement="left-start"
             eventsEnabled={open}
             className={classNames({ [classes.popperClose]: !open })}
           >

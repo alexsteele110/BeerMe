@@ -11,11 +11,9 @@ class FavoritesList extends Component {
   renderFavorites() {
     return this.props.suggested.items.map(favorite => {
       return (
-        <div key={favorite.beerId}>
-          <Paper>
-            {favorite.beerName}
-          </Paper>
-        </div>
+        <Paper key={favorite.beerName}>
+          {favorite.beerName}
+        </Paper>
       );
     });
   }
@@ -34,5 +32,3 @@ function mapStateToProps({ suggested }) {
 }
 
 export default connect(mapStateToProps, { fetchFavorites })(FavoritesList);
-
-// this.props.suggested.items[0].beerName

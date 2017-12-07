@@ -48,23 +48,23 @@ class BeerDetailsPage extends Component {
       return (
         <div className={classes.root}>
           <Grid container justify="space-between" spacing={24}>
-            <Grid item xs={12} sm={5}>
+            <Grid item xs={12} md={5}>
               <BeerCard />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
               <BeerClassification />
             </Grid>
             <Grid item xs={12}>
               <Divider />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} md={6}>
               <Typography type="display2" gutterBottom>
                 Similar beers:
               </Typography>
               <BeersList listType="suggested" />
             </Grid>
-            <Grid item xs={12} sm={5}>
+            <Grid item xs={12} md={5}>
               <GlassDetails />
             </Grid>
           </Grid>
