@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
   googleId: String,
-  reviews: { type: Number, default: 0 },
+  reviewed: [String],
   favoriteBeers: [String]
 });
 

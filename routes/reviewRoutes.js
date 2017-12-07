@@ -16,7 +16,7 @@ module.exports = app => {
 
     try {
       await review.save();
-      req.user.reviews += 1;
+      req.user.reviewed.push(review.beerId);
       const user = await req.user.save();
 
       res.send(user);

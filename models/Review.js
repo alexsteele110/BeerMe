@@ -6,7 +6,8 @@ const reviewSchema = new Schema({
   rating: { type: Number, min: 0, max: 5 },
   description: String,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
-  dateCreated: Date
+  dateCreated: Date,
+  helpful: { type: Number, default: 0 }
 });
 
 // _user property adds the idea to the schema that every review belongs to a
