@@ -55,11 +55,9 @@ class BeersList extends Component {
             <Card className={classes.card}>
               <div className={classes.details}>
                 <CardContent className={classes.content}>
-                  <Typography type="headline">
-                    {beer.name}
-                  </Typography>
+                  <Typography type="headline">{beer.name}</Typography>
                   <Typography type="subheading" color="secondary">
-                    {beer.style.shortName}
+                    {beer.style ? beer.style.shortName : ''}
                   </Typography>
                   <Typography type="body1" color="secondary">
                     <b>Brewed by:</b>{' '}

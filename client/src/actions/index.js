@@ -58,3 +58,11 @@ export const fetchFavorites = () => async dispatch => {
 
   dispatch({ type: RECEIVE_SUGGESTED_BEERS, payload: res.data });
 };
+
+export const fetchBeerReviews = beerId => async dispatch => {
+  dispatch({ type: FETCH_SUGGESTED_BEERS });
+
+  const res = await axios.get(`/api/reviews/${beerId}`);
+
+  dispatch({ type: RECEIVE_SUGGESTED_BEERS, payload: res.data })
+}

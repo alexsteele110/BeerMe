@@ -11,6 +11,7 @@ import BeerCard from './BeerCard';
 import BeerClassification from './BeerClassification';
 import BeersList from '../BeersList';
 import GlassDetails from './GlassDetails';
+import ReviewsList from './ReviewsList';
 
 const styles = theme => ({
   root: {
@@ -66,6 +67,9 @@ class BeerDetailsPage extends Component {
             </Grid>
             <Grid item xs={12} md={5}>
               <GlassDetails />
+            </Grid>
+            <Grid item xs={12}>
+              <ReviewsList />
             </Grid>
           </Grid>
         </div>
