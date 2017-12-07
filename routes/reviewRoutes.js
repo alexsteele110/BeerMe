@@ -24,4 +24,10 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
+
+  app.get('/api/reviews', requireLogin, async (req, res) => {
+    const reviews = await Review.find({});
+
+    res.send(reviews);
+  });
 };
