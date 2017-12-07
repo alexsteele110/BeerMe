@@ -78,11 +78,7 @@ class BeerDetailsPage extends Component {
   };
 
   render() {
-    return (
-      <div>
-        {this.renderContent()}
-      </div>
-    );
+    return <div>{this.renderContent()}</div>;
   }
 }
 
@@ -90,8 +86,8 @@ BeerDetailsPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beerDetails, suggested }) {
-  return { beerDetails, suggested };
+function mapStateToProps({ beerDetails }) {
+  return { beerDetails };
 }
 
 export default connect(mapStateToProps, {

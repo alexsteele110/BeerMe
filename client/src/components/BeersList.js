@@ -37,18 +37,18 @@ const styles = theme => ({
 class BeersList extends Component {
   renderContent = () => {
     const { classes, listType } = this.props;
-    const list = this.props[listType];
+    const list = this.props.beers[listType];
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
 
     if (list.isFetching) {
       return <CircularProgress />;
     }
 
-    if (list.items.length === 0) {
+    if (list.data.length === 0) {
       return <Typography type="headline">No results. Try again.</Typography>;
     }
 
-    return list.items.map(beer => {
+    return list.data.map(beer => {
       return (
         <Grid item xs={12} key={beer.id}>
           <Link to={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
@@ -91,8 +91,8 @@ BeersList.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beers, suggested }) {
-  return { beers, suggested };
+function mapStateToProps({ beers }) {
+  return { beers };
 }
 
 export default withStyles(styles, { withTheme: true })(

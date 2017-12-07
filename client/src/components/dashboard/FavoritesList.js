@@ -9,26 +9,18 @@ class FavoritesList extends Component {
   }
 
   renderFavorites() {
-    return this.props.suggested.items.map(favorite => {
-      return (
-        <Paper key={favorite.beerName}>
-          {favorite.beerName}
-        </Paper>
-      );
+    return this.props.beers.favorites.map(favorite => {
+      return <Paper key={favorite.beerName}>{favorite.beerName}</Paper>;
     });
   }
 
   render() {
-    return (
-      <div>
-        {this.renderFavorites()}
-      </div>
-    );
+    return <div>{this.renderFavorites()}</div>;
   }
 }
 
-function mapStateToProps({ suggested }) {
-  return { suggested };
+function mapStateToProps({ beers }) {
+  return { beers };
 }
 
 export default connect(mapStateToProps, { fetchFavorites })(FavoritesList);

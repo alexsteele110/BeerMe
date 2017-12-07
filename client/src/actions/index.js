@@ -1,12 +1,14 @@
 import axios from 'axios';
 import {
   FETCH_USER,
-  FETCH_BEERS,
-  RECEIVE_BEERS,
+  FETCH_RESULTS,
+  FETCH_LIST,
+  RECEIVE_RESULTS,
   FETCH_BEER_DETAILS,
   RECEIVE_BEER_DETAILS,
-  FETCH_SUGGESTED_BEERS,
-  RECEIVE_SUGGESTED_BEERS
+  RECEIVE_SUGGESTED_BEERS,
+  RECEIVE_FAVORITE_BEERS,
+  RECEIVE_BEER_REVIEWS
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -16,11 +18,11 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const fetchBeers = beer => async dispatch => {
-  dispatch({ type: FETCH_BEERS });
+  dispatch({ type: FETCH_RESULTS });
 
   const res = await axios.get(`/api/search/${beer}`);
 
-  dispatch({ type: RECEIVE_BEERS, payload: res.data });
+  dispatch({ type: RECEIVE_RESULTS, payload: res.data });
 };
 
 export const fetchBeerDetails = beerId => async dispatch => {
@@ -32,7 +34,7 @@ export const fetchBeerDetails = beerId => async dispatch => {
 };
 
 export const fetchSuggestedBeers = styleId => async dispatch => {
-  dispatch({ type: FETCH_SUGGESTED_BEERS });
+  dispatch({ type: FETCH_LIST });
 
   const res = await axios.get(`/api/suggested/${styleId}`);
 
@@ -52,17 +54,17 @@ export const updateFavorites = data => async dispatch => {
 };
 
 export const fetchFavorites = () => async dispatch => {
-  dispatch({ type: FETCH_SUGGESTED_BEERS });
+  dispatch({ type: FETCH_LIST });
 
   const res = await axios.get('/api/favorites');
 
-  dispatch({ type: RECEIVE_SUGGESTED_BEERS, payload: res.data });
+  dispatch({ type: RECEIVE_FAVORITE_BEERS, payload: res.data });
 };
 
 export const fetchBeerReviews = beerId => async dispatch => {
-  dispatch({ type: FETCH_SUGGESTED_BEERS });
+  dispatch({ type: FETCH_LIST });
 
   const res = await axios.get(`/api/reviews/${beerId}`);
 
-  dispatch({ type: RECEIVE_SUGGESTED_BEERS, payload: res.data })
-}
+  dispatch({ type: RECEIVE_BEER_REVIEWS, payload: res.data });
+};

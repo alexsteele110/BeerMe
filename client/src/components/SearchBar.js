@@ -63,9 +63,11 @@ class SearchBar extends Component {
             }}
           />
         </form>
-        {this.props.beers.fireRedirect && location !== '/search'
-          ? <Redirect to={'/search'} />
-          : ''}
+        {this.props.beers.results.fireRedirect && location !== '/search' ? (
+          <Redirect to={'/search'} />
+        ) : (
+          ''
+        )}
       </div>
     );
   }
