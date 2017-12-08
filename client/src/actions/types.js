@@ -1,10 +1,11 @@
 export const FETCH_USER = 'fetch-user';
 export const FETCH_RESULTS = 'fetch-results';
-export const FETCH_LIST = 'fetch-list';
+export const FETCH_SUGGESTED = 'fetch-suggested';
+export const FETCH_REVIEWS = 'fetch-reviews';
 export const RECEIVE_RESULTS = 'receive-results';
 export const FETCH_BEER_DETAILS = 'fetch-beer-details';
 export const RECEIVE_BEER_DETAILS = 'receive-beer-details';
-export const FETCH_SUGGESTED_BEERS = 'fetch-suggested-beers';
-export const RECEIVE_SUGGESTED_BEERS = 'receive-suggested-beers';
-export const RECEIVE_FAVORITE_BEERS = 'receive-favorite-beers';
-export const RECEIVE_BEER_REVIEWS = 'receive-beer-reviews';
+export const FETCH_FAVORITES = 'fetch-favorites';
+export const RECEIVE_SUGGESTED = 'receive-suggested';
+export const RECEIVE_FAVORITES = 'receive-favorites';
+export const RECEIVE_REVIEWS = 'receive-reviews';

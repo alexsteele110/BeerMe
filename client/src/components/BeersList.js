@@ -37,7 +37,7 @@ const styles = theme => ({
 class BeersList extends Component {
   renderContent = () => {
     const { classes, listType } = this.props;
-    const list = this.props.beers[listType];
+    const list = this.props[listType];
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
 
     if (list.isFetching) {
@@ -91,8 +91,8 @@ BeersList.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beers }) {
-  return { beers };
+function mapStateToProps({ results, suggested }) {
+  return { results, suggested };
 }
 
 export default withStyles(styles, { withTheme: true })(

@@ -81,7 +81,7 @@ class BeerCard extends Component {
             </div>
           </CardContent>
           <CardActions>
-            <SnackbarAlert />
+            {this.props.auth ? <SnackbarAlert /> : ''}
             <ReviewDialog beerId={data.id} />
             <div className={classes.flexGrow} />
             <IconButton
@@ -97,9 +97,7 @@ class BeerCard extends Component {
           </CardActions>
           <Collapse in={this.state.expanded} timeout={700} unmountOnExit>
             <CardContent>
-              <Typography type="body1">
-                {data.description}
-              </Typography>
+              <Typography type="body1">{data.description}</Typography>
             </CardContent>
           </Collapse>
         </Card>

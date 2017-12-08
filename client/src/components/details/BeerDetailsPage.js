@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBeerDetails, fetchSuggestedBeers } from '../../actions';
+import {
+  fetchBeerDetails,
+  fetchSuggestedBeers,
+  fetchBeerReviews
+} from '../../actions';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
@@ -30,6 +34,8 @@ class BeerDetailsPage extends Component {
 
     const { styleId } = this.props.beerDetails.info.data;
     await this.props.fetchSuggestedBeers(styleId);
+
+    await this.props.fetchBeerReviews(beerId);
   }
 
   renderContent = () => {
@@ -92,5 +98,6 @@ function mapStateToProps({ beerDetails }) {
 
 export default connect(mapStateToProps, {
   fetchBeerDetails,
-  fetchSuggestedBeers
+  fetchSuggestedBeers,
+  fetchBeerReviews
 })(withStyles(styles)(BeerDetailsPage));

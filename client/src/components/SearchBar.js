@@ -63,7 +63,7 @@ class SearchBar extends Component {
             }}
           />
         </form>
-        {this.props.beers.results.fireRedirect && location !== '/search' ? (
+        {this.props.results.fireRedirect && location !== '/search' ? (
           <Redirect to={'/search'} />
         ) : (
           ''
@@ -77,8 +77,8 @@ SearchBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beers }) {
-  return { beers };
+function mapStateToProps({ results }) {
+  return { results };
 }
 
 export default connect(mapStateToProps, { fetchBeers })(

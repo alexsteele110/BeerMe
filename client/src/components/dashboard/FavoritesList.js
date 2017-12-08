@@ -4,23 +4,33 @@ import { fetchFavorites } from '../../actions';
 import Paper from 'material-ui/Paper';
 
 class FavoritesList extends Component {
-  componentDidMount() {
-    this.props.fetchFavorites();
+  async componentDidMount() {
+    await this.props.fetchFavorites();
   }
 
-  renderFavorites() {
-    return this.props.beers.favorites.map(favorite => {
-      return <Paper key={favorite.beerName}>{favorite.beerName}</Paper>;
+  renderFavorites = () => {
+    const { isFetching, data } = this.props.favorites;
+
+    if (isFetching) {
+      return <h3>Loading...</h3>;
+    }
+
+    return data.map(favorite => {
+      return (
+        <div key={favorite.beerId}>
+          <Paper>{favorite.beerName}</Paper>
+        </div>
+      );
     });
-  }
+  };
 
   render() {
     return <div>{this.renderFavorites()}</div>;
   }
 }
 
-function mapStateToProps({ beers }) {
-  return { beers };
+function mapStateToProps({ favorites }) {
+  return { favorites };
 }
 
 export default connect(mapStateToProps, { fetchFavorites })(FavoritesList);
