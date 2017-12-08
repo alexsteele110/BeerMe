@@ -60,6 +60,7 @@ class BeerCard extends Component {
     const { data } = this.props.beerDetails.info;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
     const { classes } = this.props;
+    const alreadyReviewed = this.props.auth.reviewed.includes(data.id);
 
     return (
       <div>
@@ -81,8 +82,9 @@ class BeerCard extends Component {
             </div>
           </CardContent>
           <CardActions>
+            {/* add more logic to handle review icon */}
             {this.props.auth ? <SnackbarAlert /> : ''}
-            <ReviewDialog beerId={data.id} />
+            {alreadyReviewed ? '' : <ReviewDialog beerId={data.id} />}
             <div className={classes.flexGrow} />
             <IconButton
               className={classnames(classes.expand, {

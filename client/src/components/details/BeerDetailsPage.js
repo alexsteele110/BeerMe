@@ -74,7 +74,7 @@ class BeerDetailsPage extends Component {
             <Grid item xs={12} md={5}>
               <GlassDetails />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <ReviewsList />
             </Grid>
           </Grid>

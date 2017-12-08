@@ -1,5 +1,10 @@
 export default function listWithType(category = '') {
-  return function(state = { isFetching: false, data: [] }, action) {
+  const initialState = {
+    isFetching: false,
+    data: []
+  };
+
+  return function(state = initialState, action) {
     switch (action.type) {
       case `fetch-${category}`:
         return {

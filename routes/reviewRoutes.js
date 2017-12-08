@@ -11,6 +11,7 @@ module.exports = app => {
       rating,
       description,
       _user: req.user.id,
+      displayName: req.user.displayName,
       dateCreated: Date.now()
     });
 
@@ -34,7 +35,7 @@ module.exports = app => {
   app.get('/api/reviews/:beerId', async (req, res) => {
     const { beerId } = req.params;
     const reviews = await Review.find({ beerId });
-    
+
     res.send(reviews);
-  })
+  });
 };
