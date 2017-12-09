@@ -4,8 +4,8 @@ import { fetchFavorites } from '../../actions';
 import Paper from 'material-ui/Paper';
 
 class FavoritesList extends Component {
-  async componentDidMount() {
-    await this.props.fetchFavorites();
+  componentDidMount() {
+    this.props.fetchFavorites();
   }
 
   renderFavorites = () => {

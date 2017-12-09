@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchBeerReviews } from '../../actions';
 import { withStyles } from 'material-ui/styles';
 import Rating from 'react-rating';
 import Paper from 'material-ui/Paper';
@@ -25,11 +26,23 @@ const styles = {
 };
 
 class ReviewsList extends Component {
+  componentDidMount() {
+    const { beerId } = this.props;
+    const { data } = this.props.reviews;
+    // figure out how to account for None found scenario
+    if (data.length === 0 || data[0].beerId !== beerId) {
+      this.props.fetchBeerReviews(beerId);
+    }
+  }
   renderReviews = () => {
     const { isFetching, data } = this.props.reviews;
 
     if (isFetching) {
       return <CircularProgress />;
+    }
+
+    if (data[0] === 'None found') {
+      return <h3>No reviews yet.</h3>;
     }
 
     return data.map(review => {
@@ -67,4 +80,6 @@ function mapStateToProps({ reviews }) {
   return { reviews };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(ReviewsList));
+export default connect(mapStateToProps, { fetchBeerReviews })(
+  withStyles(styles)(ReviewsList)
+);

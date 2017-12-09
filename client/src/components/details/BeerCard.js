@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchBeerDetails } from '../../actions';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
+import Grid from 'material-ui/Grid';
 import Card, {
   CardHeader,
   CardMedia,
@@ -52,59 +54,93 @@ const styles = theme => ({
 class BeerCard extends Component {
   state = { expanded: false };
 
+  componentDidMount() {
+    const { beerId } = this.props;
+    const { data } = this.props.beerDetails.info;
+    // if statement prevents unnecessary refetching
+    if (!data || data.id !== beerId) {
+      this.props.fetchBeerDetails(beerId);
+    }
+  }
+
   handleExpandClick = () => {
     this.setState({ expanded: !this.state.expanded });
   };
 
-  render() {
-    const { data } = this.props.beerDetails.info;
+  renderCard = () => {
+    const { data, status } = this.props.beerDetails.info;
+    const { isFetching } = this.props.beerDetails;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
     const { classes } = this.props;
-    const alreadyReviewed = this.props.auth.reviewed.includes(data.id);
 
-    return (
-      <div>
-        <Card>
-          <CardHeader title={data.name} subheader={data.breweries[0].name} />
-          <CardMedia
-            className={classes.media}
-            image={data.labels ? data.labels.large : altImage}
-            title={data.name}
-          />
-          <CardContent>
-            <div className={classes.row}>
-              <Chip className={classes.chip} label={`ABV: ${data.abv}%`} />
-              <Chip className={classes.chip} label={`IBU: ${data.ibu}`} />
-              <Chip
-                className={classes.chip}
-                label={`Organic: ${data.isOrganic}`}
+    if (isFetching) {
+      return <h3>Loading...</h3>;
+    }
+
+    if (status === 'success') {
+      return (
+        <Grid container justify="space-between" spacing={24}>
+          <Grid item xs={12} md={5}>
+            <Card>
+              <CardHeader
+                title={data.name}
+                subheader={data.breweries[0].name}
               />
-            </div>
-          </CardContent>
-          <CardActions>
-            {/* add more logic to handle review icon */}
-            {this.props.auth ? <SnackbarAlert /> : ''}
-            {alreadyReviewed ? '' : <ReviewDialog beerId={data.id} />}
-            <div className={classes.flexGrow} />
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={this.state.expanded} timeout={700} unmountOnExit>
-            <CardContent>
-              <Typography type="body1">{data.description}</Typography>
-            </CardContent>
-          </Collapse>
-        </Card>
-      </div>
-    );
+              <CardMedia
+                className={classes.media}
+                image={data.labels ? data.labels.large : altImage}
+                title={data.name}
+              />
+              <CardContent>
+                <div className={classes.row}>
+                  <Chip className={classes.chip} label={`ABV: ${data.abv}%`} />
+                  <Chip className={classes.chip} label={`IBU: ${data.ibu}`} />
+                  <Chip
+                    className={classes.chip}
+                    label={`Organic: ${data.isOrganic}`}
+                  />
+                </div>
+              </CardContent>
+              <CardActions>
+                {/* add more logic to handle review icon */}
+                {this.props.auth ? <SnackbarAlert /> : ''}
+                <ReviewDialog beerId={data.id} />
+                <div className={classes.flexGrow} />
+                <IconButton
+                  className={classnames(classes.expand, {
+                    [classes.expandOpen]: this.state.expanded
+                  })}
+                  onClick={this.handleExpandClick}
+                  aria-expanded={this.state.expanded}
+                  aria-label="Show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={this.state.expanded} timeout={700} unmountOnExit>
+                <CardContent>
+                  <Typography type="body1">{data.description}</Typography>
+                </CardContent>
+              </Collapse>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography type="display2" gutterBottom>
+              Classification
+            </Typography>
+            <Typography type="headline" gutterBottom>
+              {data.style.name}
+            </Typography>
+            <br />
+            <Typography type="subheading">{data.style.description}</Typography>
+          </Grid>
+        </Grid>
+      );
+    }
+  };
+
+  render() {
+    return <div>{this.renderCard()}</div>;
   }
 }
 
@@ -116,4 +152,6 @@ function mapStateToProps({ beerDetails, auth }) {
   return { beerDetails, auth };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(BeerCard));
+export default connect(mapStateToProps, { fetchBeerDetails })(
+  withStyles(styles)(BeerCard)
+);

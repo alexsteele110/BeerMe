@@ -1,90 +1,76 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  fetchBeerDetails,
-  fetchSuggestedBeers,
-  fetchBeerReviews
-} from '../../actions';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { CircularProgress } from 'material-ui/Progress';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import Divider from 'material-ui/Divider';
+import AppBar from 'material-ui/AppBar';
+import Tabs, { Tab } from 'material-ui/Tabs';
 import BeerCard from './BeerCard';
-import BeerClassification from './BeerClassification';
-import BeersList from '../BeersList';
-import GlassDetails from './GlassDetails';
+import Suggestions from './Suggestions';
 import ReviewsList from './ReviewsList';
+
+function TabContainer(props) {
+  return <div style={{ padding: 8 * 3 }}>{props.children}</div>;
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: '5%'
+    marginTop: 50,
+    backgroundColor: '#CFD8DC'
   },
-  progress: {
-    margin: '25% 50%'
+  tabBar: {
+    top: 64,
+    boxShadow: theme.shadows[0],
+    zIndex: 1000,
+    [theme.breakpoints.down('sm')]: {
+      top: 56
+    }
   }
 });
 
 class BeerDetailsPage extends Component {
-  async componentDidMount() {
-    const { beerId } = this.props.match.params;
-    await this.props.fetchBeerDetails(beerId);
+  state = {
+    value: 0
+  };
 
-    const { styleId } = this.props.beerDetails.info.data;
-    await this.props.fetchSuggestedBeers(styleId);
-
-    await this.props.fetchBeerReviews(beerId);
-  }
-
-  renderContent = () => {
-    const { status } = this.props.beerDetails.info;
-    const { isFetching } = this.props.beerDetails;
-    const { classes } = this.props;
-
-    if (isFetching) {
-      return (
-        <div>
-          <CircularProgress className={classes.progress} size={100} />
-        </div>
-      );
-    }
-
-    if (status === 'success') {
-      return (
-        <div className={classes.root}>
-          <Grid container justify="space-between" spacing={24}>
-            <Grid item xs={12} md={5}>
-              <BeerCard />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <BeerClassification />
-            </Grid>
-            <Grid item xs={12}>
-              <Divider />
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Typography type="display2" gutterBottom>
-                Similar beers:
-              </Typography>
-              <BeersList listType="suggested" />
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <GlassDetails />
-            </Grid>
-            <Grid item xs={6}>
-              <ReviewsList />
-            </Grid>
-          </Grid>
-        </div>
-      );
-    }
+  handleChange = (event, value) => {
+    this.setState({ value });
   };
 
   render() {
-    return <div>{this.renderContent()}</div>;
+    const { classes } = this.props;
+    const { value } = this.state;
+    const { beerId } = this.props.match.params;
+
+    return (
+      <div className={classes.root}>
+        <AppBar className={classes.tabBar}>
+          <Tabs value={value} onChange={this.handleChange}>
+            <Tab label="Overview" />
+            <Tab label="Suggestions" />
+            <Tab label="Reviews" href="#basic-tabs" />
+          </Tabs>
+        </AppBar>
+        {value === 0 && (
+          <TabContainer>
+            <BeerCard beerId={beerId} />
+          </TabContainer>
+        )}
+        {value === 1 && (
+          <TabContainer>
+            <Suggestions beerId={beerId} />
+          </TabContainer>
+        )}
+        {value === 2 && (
+          <TabContainer>
+            <ReviewsList beerId={beerId} />
+          </TabContainer>
+        )}
+      </div>
+    );
   }
 }
 
@@ -92,12 +78,4 @@ BeerDetailsPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beerDetails }) {
-  return { beerDetails };
-}
-
-export default connect(mapStateToProps, {
-  fetchBeerDetails,
-  fetchSuggestedBeers,
-  fetchBeerReviews
-})(withStyles(styles)(BeerDetailsPage));
+export default withStyles(styles)(BeerDetailsPage);

@@ -10,7 +10,7 @@ import Button from 'material-ui/Button';
 import SearchBar from './SearchBar';
 import AccountAvatar from './AccountAvatar';
 
-const styles = {
+const styles = theme => ({
   root: {
     height: 60,
     width: '100%'
@@ -22,8 +22,11 @@ const styles = {
     marginLeft: 20,
     textDecoration: 'none',
     color: 'white'
+  },
+  header: {
+    boxShadow: theme.shadows[0]
   }
-};
+});
 
 class Header extends Component {
   renderContent() {
@@ -45,7 +48,7 @@ class Header extends Component {
     const { classes, location } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="fixed">
+        <AppBar className={classes.header} position="fixed">
           <Toolbar disableGutters>
             <Typography type="title" color="inherit" className={classes.flex}>
               <Link to="/" className={classes.logo}>

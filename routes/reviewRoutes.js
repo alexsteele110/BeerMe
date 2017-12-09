@@ -36,6 +36,10 @@ module.exports = app => {
     const { beerId } = req.params;
     const reviews = await Review.find({ beerId });
 
+    if (reviews.length === 0) {
+      reviews.push('None found');
+      res.send(reviews);
+    }
     res.send(reviews);
   });
 };
