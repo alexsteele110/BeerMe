@@ -20,16 +20,16 @@ const styles = theme => ({
       marginTop: 40
     }
   },
-  paper: {
-    padding: 24,
-    height: 400
-  },
   banner: {
     padding: 136,
     textAlign: 'center',
     color: theme.palette.text.secondary,
     background: 'url(https://i.imgur.com/5utcnvd.png)',
-    height: 360
+    height: 220,
+    backgroundAttachment: 'fixed',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
   },
   button: {
     margin: theme.spacing.unit
@@ -65,11 +65,11 @@ function Landing(props) {
       <Grid container justify="center" spacing={24}>
         <Grid item xs={12}>
           <Paper className={classes.banner}>
-            <Typography className={classes.greeting} type="display4">
+            <Typography className={classes.greeting} type="display3">
               BeerMe
             </Typography>
-            <Typography className={classes.greeting} type="display1">
-              Serving all of your beer and brewery needs.
+            <Typography className={classes.greeting} type="headline">
+              Serving all of your beer and brewery needs
             </Typography>
             <Button className={classes.button} raised color="inherit">
               Get Started

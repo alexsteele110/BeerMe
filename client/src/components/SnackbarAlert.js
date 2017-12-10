@@ -44,7 +44,10 @@ class SimpleSnackbar extends Component {
           enterDelay={300}
         >
           <IconButton onClick={this.handleClick}>
-            {this.decideContent(<FavoriteIcon style={{ color: '#C95353'}} />, <FavoriteBorderIcon />)}
+            {this.decideContent(
+              <FavoriteIcon style={{ color: '#C95353' }} />,
+              <FavoriteBorderIcon />
+            )}
           </IconButton>
         </Tooltip>
         <Snackbar

@@ -14,6 +14,7 @@ import Card, {
 import Collapse from 'material-ui/transitions/Collapse';
 import IconButton from 'material-ui/IconButton';
 import Chip from 'material-ui/Chip';
+import { CircularProgress } from 'material-ui/Progress';
 import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import ReviewDialog from '../reviews/ReviewDialog';
@@ -65,6 +66,7 @@ class BeerCard extends Component {
 
   handleExpandClick = () => {
     this.setState({ expanded: !this.state.expanded });
+    console.log(this.props);
   };
 
   renderCard = () => {
@@ -74,7 +76,7 @@ class BeerCard extends Component {
     const { classes } = this.props;
 
     if (isFetching) {
-      return <h3>Loading...</h3>;
+      return <CircularProgress />;
     }
 
     if (status === 'success') {
@@ -119,20 +121,24 @@ class BeerCard extends Component {
               </CardActions>
               <Collapse in={this.state.expanded} timeout={700} unmountOnExit>
                 <CardContent>
-                  <Typography type="body1">{data.description}</Typography>
+                  <Typography type="body1">
+                    {data.description}
+                  </Typography>
                 </CardContent>
               </Collapse>
             </Card>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography type="display2" gutterBottom>
-              Classification
+            <Typography type="display1" gutterBottom>
+              Style
             </Typography>
             <Typography type="headline" gutterBottom>
               {data.style.name}
             </Typography>
             <br />
-            <Typography type="subheading">{data.style.description}</Typography>
+            <Typography type="subheading">
+              {data.style.description}
+            </Typography>
           </Grid>
         </Grid>
       );
@@ -140,7 +146,11 @@ class BeerCard extends Component {
   };
 
   render() {
-    return <div>{this.renderCard()}</div>;
+    return (
+      <div>
+        {this.renderCard()}
+      </div>
+    );
   }
 }
 
