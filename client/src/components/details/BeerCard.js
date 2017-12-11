@@ -58,7 +58,8 @@ class BeerCard extends Component {
   componentDidMount() {
     const { beerId } = this.props;
     const { data } = this.props.beerDetails.info;
-    // if statement prevents unnecessary refetching
+    // if statement prevents unnecessary refetching. data.id contains redux
+    // state and beerId is checking current url path which has the beer id
     if (!data || data.id !== beerId) {
       this.props.fetchBeerDetails(beerId);
     }
@@ -106,10 +107,12 @@ class BeerCard extends Component {
               </CardContent>
               <CardActions>
                 {auth ? <SnackbarAlert /> : ''}
-                {alreadyReviewed
-                  ? <p>ALREADY REVIEWED</p>
-                  : <ReviewDialog beerId={data.id} />}
-
+                {
+                  <ReviewDialog
+                    beerId={data.id}
+                    allowedToReview={!alreadyReviewed}
+                  />
+                }
                 <div className={classes.flexGrow} />
                 <IconButton
                   className={classnames(classes.expand, {

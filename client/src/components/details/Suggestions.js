@@ -75,7 +75,7 @@ class Suggestions extends Component {
 
     return (
       <div>
-        <Typography type="headline">None recommended</Typography>
+        <Typography type="headline">No glass recommended</Typography>
       </div>
     );
   }
