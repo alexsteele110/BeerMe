@@ -81,7 +81,6 @@ class BeerCard extends Component {
     }
 
     if (status === 'success' && auth !== null) {
-      const alreadyReviewed = auth.reviewed.includes(data.id);
       return (
         <Grid container justify="space-between" spacing={24}>
           <Grid item xs={12} md={5}>
@@ -107,12 +106,7 @@ class BeerCard extends Component {
               </CardContent>
               <CardActions>
                 {auth ? <SnackbarAlert /> : ''}
-                {
-                  <ReviewDialog
-                    beerId={data.id}
-                    allowedToReview={!alreadyReviewed}
-                  />
-                }
+                <ReviewDialog beerId={data.id} />
                 <div className={classes.flexGrow} />
                 <IconButton
                   className={classnames(classes.expand, {

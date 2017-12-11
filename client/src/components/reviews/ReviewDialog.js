@@ -54,61 +54,72 @@ class ReviewDialog extends Component {
   };
 
   render() {
-    const { allowedToReview, classes } = this.props;
+    if (this.props.auth !== null) {
+      const { auth, beerId, classes } = this.props;
+      const allowedToReview = auth.reviewed.includes(beerId);
 
-    if (allowedToReview) {
-      return (
-        <div>
-          <Tooltip title="Add Review" placement="bottom" enterDelay={300}>
-            <IconButton onClick={this.handleClickOpen}>
-              <RateReviewIcon className={classes.clickable} />
-            </IconButton>
-          </Tooltip>
-          <Dialog open={this.state.dialogOpen}>
-            <DialogTitle>
-              Review this beer
-              <IconButton onClick={this.handleRequestClose}>
-                <CloseIcon />
+      if (!allowedToReview) {
+        return (
+          <div>
+            <Tooltip title="Add Review" placement="bottom" enterDelay={300}>
+              <IconButton onClick={this.handleClickOpen}>
+                <RateReviewIcon className={classes.clickable} />
               </IconButton>
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Submit your overall rating along with a description.
-              </DialogContentText>
-              <ReviewForm onSubmit={this.submit} />
-            </DialogContent>
-          </Dialog>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <Tooltip title="Already reviewed" placement="bottom" enterDelay={300}>
-            <div>
-              <IconButton disabled>
-                <RateReviewIcon className={classes.disabled} />
-              </IconButton>
-            </div>
-          </Tooltip>
-          <Snackbar
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left'
-            }}
-            open={this.state.alertOpen}
-            autoHideDuration={4000}
-            onRequestClose={this.handleRequestClose}
-            SnackbarContentProps={{
-              'aria-describedby': 'message-id'
-            }}
-            message={<span id="message-id">Review submitted</span>}
-          />
-        </div>
-      );
+            </Tooltip>
+            <Dialog open={this.state.dialogOpen}>
+              <DialogTitle>
+                Review this beer
+                <IconButton onClick={this.handleRequestClose}>
+                  <CloseIcon />
+                </IconButton>
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Submit your overall rating along with a description.
+                </DialogContentText>
+                <ReviewForm onSubmit={this.submit} />
+              </DialogContent>
+            </Dialog>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <Tooltip
+              title="Already reviewed"
+              placement="bottom"
+              enterDelay={300}
+            >
+              <div>
+                <IconButton disabled>
+                  <RateReviewIcon className={classes.disabled} />
+                </IconButton>
+              </div>
+            </Tooltip>
+            <Snackbar
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left'
+              }}
+              open={this.state.alertOpen}
+              autoHideDuration={4000}
+              onRequestClose={this.handleRequestClose}
+              SnackbarContentProps={{
+                'aria-describedby': 'message-id'
+              }}
+              message={<span id="message-id">Review submitted</span>}
+            />
+          </div>
+        );
+      }
     }
   }
 }
 
-export default connect(null, { submitReview })(
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps, { submitReview })(
   withStyles(styles)(ReviewDialog)
 );
