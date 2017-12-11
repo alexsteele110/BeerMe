@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchBeerReviews } from '../../actions';
 import { withStyles } from 'material-ui/styles';
 import Rating from 'react-rating';
+import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
@@ -12,8 +13,12 @@ import StarBorderIcon from 'material-ui-icons/StarBorder';
 import StarIcon from 'material-ui-icons/Star';
 
 const styles = {
+  root: {
+    flexGrow: 1,
+    marginTop: 30
+  },
   paper: {
-    padding: 16
+    padding: 24
   },
   thumb: {
     height: 22,
@@ -50,7 +55,7 @@ class ReviewsList extends Component {
       const dateCreated = new Date(review.dateCreated).toLocaleDateString();
 
       return (
-        <div key={review._id}>
+        <Grid item xs={12} md={6} lg={4} key={review._id}>
           <Paper className={classes.paper}>
             <Rating
               initialRate={review.rating}
@@ -68,15 +73,18 @@ class ReviewsList extends Component {
               <ThumbUpIcon className={classes.thumb} /> {review.helpful}
             </Typography>
           </Paper>
-        </div>
+        </Grid>
       );
     });
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        {this.renderReviews()}
+      <div className={classes.root}>
+        <Grid container spacing={24}>
+          {this.renderReviews()}
+        </Grid>
       </div>
     );
   }

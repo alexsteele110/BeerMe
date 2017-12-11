@@ -70,16 +70,17 @@ class BeerCard extends Component {
   };
 
   renderCard = () => {
+    const { classes, auth } = this.props;
     const { data, status } = this.props.beerDetails.info;
     const { isFetching } = this.props.beerDetails;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
-    const { classes } = this.props;
 
     if (isFetching) {
       return <CircularProgress />;
     }
 
-    if (status === 'success') {
+    if (status === 'success' && auth !== null) {
+      const alreadyReviewed = auth.reviewed.includes(data.id);
       return (
         <Grid container justify="space-between" spacing={24}>
           <Grid item xs={12} md={5}>
@@ -104,9 +105,11 @@ class BeerCard extends Component {
                 </div>
               </CardContent>
               <CardActions>
-                {/* add more logic to handle review icon */}
-                {this.props.auth ? <SnackbarAlert /> : ''}
-                <ReviewDialog beerId={data.id} />
+                {auth ? <SnackbarAlert /> : ''}
+                {alreadyReviewed
+                  ? <p>ALREADY REVIEWED</p>
+                  : <ReviewDialog beerId={data.id} />}
+
                 <div className={classes.flexGrow} />
                 <IconButton
                   className={classnames(classes.expand, {

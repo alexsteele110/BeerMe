@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import serialize from 'serialize-javascript';
 import { submitReview } from '../../actions';
-import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
+import CloseIcon from 'material-ui-icons/Close';
 import RateReviewIcon from 'material-ui-icons/RateReview';
 import Tooltip from 'material-ui/Tooltip';
 import Dialog, {
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle
@@ -20,7 +20,12 @@ class ReviewDialog extends Component {
 
   submit = values => {
     const { beerId } = this.props;
-    const review = { beerId, ...values };
+    const serializedDescription = serialize(values.description);
+    const review = {
+      beerId,
+      rating: values.rating,
+      description: serializedDescription
+    };
 
     this.props.submitReview(review);
   };
@@ -43,21 +48,18 @@ class ReviewDialog extends Component {
         </Tooltip>
 
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-          <DialogTitle>Review Beer</DialogTitle>
+          <DialogTitle>
+            Review this beer
+            <IconButton onClick={this.handleRequestClose}>
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Submit your overall rating along with some praises and criticisms.
+              Submit your overall rating along with a description.
             </DialogContentText>
             <ReviewForm onSubmit={this.submit} />
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleRequestClose} color="contrast">
-              Cancel
-            </Button>
-            <Button onClick={this.handleRequestClose} color="primary">
-              Submit
-            </Button>
-          </DialogActions>
         </Dialog>
       </div>
     );

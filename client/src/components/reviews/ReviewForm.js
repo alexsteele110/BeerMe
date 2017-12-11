@@ -10,8 +10,25 @@ import StarIcon from 'material-ui-icons/Star';
 const styles = theme => ({
   star: {
     color: '#EC8C19'
+  },
+  button: {
+    marginTop: 30,
+    float: 'right'
   }
 });
+
+const validate = values => {
+  const errors = {};
+  if (!values.rating) {
+    errors.description = 'Rating required';
+  }
+  if (!values.description) {
+    errors.description = 'Review required';
+  } else if (values.description.length > 300) {
+    errors.description = '300 characters or less';
+  }
+  return errors;
+};
 
 const renderTextField = ({
   input,
@@ -22,6 +39,7 @@ const renderTextField = ({
   <TextField
     label={label}
     error={touched && error}
+    helperText={touched && error}
     multiline
     fullWidth
     rows="4"
@@ -38,7 +56,7 @@ class ReviewForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, classes } = this.props;
+    const { handleSubmit, pristine, submitting, classes } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <Field name="rating" type="hidden" component="input" />
@@ -61,15 +79,12 @@ class ReviewForm extends Component {
         </div>
 
         <div>
-          <Button type="submit" disabled={pristine || submitting}>
-            Submit
-          </Button>
           <Button
-            type="button"
+            className={classes.button}
+            type="submit"
             disabled={pristine || submitting}
-            onClick={reset}
           >
-            Clear Values
+            Submit
           </Button>
         </div>
       </form>
@@ -78,7 +93,8 @@ class ReviewForm extends Component {
 }
 
 ReviewForm = reduxForm({
-  form: 'review'
+  form: 'review',
+  validate
 })(ReviewForm);
 
 export default withStyles(styles)(ReviewForm);
