@@ -20,7 +20,7 @@ class ReviewDialog extends Component {
 
   submit = values => {
     const { beerId } = this.props;
-    const review = Object.assign({ beerId }, values);
+    const review = { beerId, ...values };
 
     this.props.submitReview(review);
   };

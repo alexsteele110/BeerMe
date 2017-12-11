@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import { Field, reduxForm } from 'redux-form';
 import Rating from 'react-rating';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 import StarBorderIcon from 'material-ui-icons/StarBorder';
 import StarIcon from 'material-ui-icons/Star';
 
@@ -10,6 +12,22 @@ const styles = theme => ({
     color: '#EC8C19'
   }
 });
+
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error },
+  ...custom
+}) =>
+  <TextField
+    label={label}
+    error={touched && error}
+    multiline
+    fullWidth
+    rows="4"
+    {...input}
+    {...custom}
+  />;
 
 class ReviewForm extends Component {
   state = { starRating: 0 };
@@ -33,23 +51,26 @@ class ReviewForm extends Component {
           initialRate={this.state.starRating}
         />
         <div>
-          <label>Review</label>
           <div>
-            <Field name="description" component="textarea" />
+            <Field
+              name="description"
+              label="Review"
+              component={renderTextField}
+            />
           </div>
         </div>
 
         <div>
-          <button type="submit" disabled={pristine || submitting}>
+          <Button type="submit" disabled={pristine || submitting}>
             Submit
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             disabled={pristine || submitting}
             onClick={reset}
           >
             Clear Values
-          </button>
+          </Button>
         </div>
       </form>
     );

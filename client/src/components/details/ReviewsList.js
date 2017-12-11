@@ -50,7 +50,7 @@ class ReviewsList extends Component {
       const dateCreated = new Date(review.dateCreated).toLocaleDateString();
 
       return (
-        <div key={review.beerId}>
+        <div key={review._id}>
           <Paper className={classes.paper}>
             <Rating
               initialRate={review.rating}
@@ -59,7 +59,9 @@ class ReviewsList extends Component {
               full={<StarIcon className={classes.star} />}
             />
 
-            <Typography type="body1">{review.description}</Typography>
+            <Typography type="body1">
+              {review.description}
+            </Typography>
             <Divider />
             <Typography type="caption">
               <b>{review.displayName}</b> on {dateCreated} | Helpful?{' '}
@@ -72,7 +74,11 @@ class ReviewsList extends Component {
   };
 
   render() {
-    return <div>{this.renderReviews()}</div>;
+    return (
+      <div>
+        {this.renderReviews()}
+      </div>
+    );
   }
 }
 
