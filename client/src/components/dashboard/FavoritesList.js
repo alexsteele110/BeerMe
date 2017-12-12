@@ -11,6 +11,7 @@ import List, {
 } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
+import InfoOutlineIcon from 'material-ui-icons/InfoOutline';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ReviewDialog from '../reviews/ReviewDialog';
 
@@ -39,25 +40,23 @@ class FavoritesList extends Component {
 
     return data.map(favorite => {
       return (
-        <Link
-          to={`/beer/${favorite.beerId}`}
-          style={{ textDecoration: 'none' }}
-        >
-          <ListItem button key={favorite._id}>
-            <ListItemIcon>
-              <ReviewDialog beerId={favorite.beerId} />
-            </ListItemIcon>
-            <ListItemText
-              primary={favorite.beerName}
-              secondary={favorite.breweryName}
-            />
-            <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-        </Link>
+        <ListItem button key={favorite._id}>
+          <ListItemIcon>
+            <ReviewDialog beerId={favorite.beerId} />
+          </ListItemIcon>
+          <ListItemText
+            primary={favorite.beerName}
+            secondary={favorite.breweryName}
+          />
+          <ListItemSecondaryAction>
+            <IconButton aria-label="Delete">
+              <DeleteIcon />
+            </IconButton>
+            <IconButton component={Link} to={`/beer/${favorite.beerId}`}>
+              <InfoOutlineIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
       );
     });
   };
