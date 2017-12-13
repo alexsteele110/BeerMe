@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import requireAuth from '../hocs/requireAuth';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import FavoritesList from './FavoritesList';
@@ -34,4 +35,4 @@ DashboardPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(DashboardPage);
+export default withStyles(styles)(requireAuth(DashboardPage));
