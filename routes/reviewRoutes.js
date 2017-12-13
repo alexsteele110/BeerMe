@@ -25,16 +25,21 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
-  // retrieve all user reviews created
-  app.get('/api/reviews', async (req, res) => {
-    const allReviews = await Review.find({});
-
-    res.send(allReviews);
-  });
   // retrieve all reviews made for particular beerId
   app.get('/api/reviews/:beerId', async (req, res) => {
     const { beerId } = req.params;
     const reviews = await Review.find({ beerId });
+
+    if (reviews.length === 0) {
+      reviews.push('None found');
+      res.send(reviews);
+    }
+    res.send(reviews);
+  });
+
+  app.get('/api/reviews', requireLogin, async (req, res) => {
+    const _user = req.user.id;
+    const reviews = await Review.find({ _user });
 
     if (reviews.length === 0) {
       reviews.push('None found');

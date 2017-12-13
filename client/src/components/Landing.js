@@ -52,8 +52,9 @@ const styles = theme => ({
     marginBottom: 6
   },
   container: {
-    padding: 50,
-    textAlign: 'center'
+    padding: 40,
+    textAlign: 'center',
+    height: '100%'
   }
 });
 
@@ -73,13 +74,13 @@ function Landing(props) {
           Get Started
         </Button>
       </Paper>
-      <Button className={classes.fab} fab color="primary">
+      <Button className={classes.fab} fab color="accent">
         <KeyboardArrowDownIcon />
       </Button>
 
       <div className={classes.root}>
         <Grid container justify="center" spacing={24}>
-          <Grid item sm={12} md={4}>
+          <Grid item xs={12} md={4}>
             <div className={classes.container}>
               <FavoriteIcon
                 style={{ color: '#C95353' }}
@@ -96,7 +97,7 @@ function Landing(props) {
               </Typography>
             </div>
           </Grid>
-          <Grid item sm={12} md={4}>
+          <Grid item xs={12} md={4}>
             <div className={classes.container}>
               <RateReviewIcon
                 style={{ color: '#3E997E' }}
@@ -113,7 +114,7 @@ function Landing(props) {
               </Typography>
             </div>
           </Grid>
-          <Grid item sm={12} md={4}>
+          <Grid item xs={12} md={4}>
             <div className={classes.container}>
               <FindInPageIcon
                 style={{ color: '#4668B2' }}

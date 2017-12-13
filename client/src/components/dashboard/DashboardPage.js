@@ -22,7 +22,7 @@ function DashboardPage(props) {
   return (
     <div className={classes.root}>
       <Grid container spacing={24}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <FavoritesList />
         </Grid>
       </Grid>

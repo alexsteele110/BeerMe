@@ -5,12 +5,14 @@ import {
   FETCH_SUGGESTED,
   FETCH_FAVORITES,
   FETCH_REVIEWS,
+  FETCH_MY_REVIEWS,
   FETCH_BEER_DETAILS,
   RECEIVE_RESULTS,
   RECEIVE_BEER_DETAILS,
   RECEIVE_SUGGESTED,
   RECEIVE_FAVORITES,
-  RECEIVE_REVIEWS
+  RECEIVE_REVIEWS,
+  RECEIVE_MY_REVIEWS
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -69,4 +71,12 @@ export const fetchBeerReviews = beerId => async dispatch => {
   const res = await axios.get(`/api/reviews/${beerId}`);
 
   dispatch({ type: RECEIVE_REVIEWS, payload: res.data });
+};
+
+export const fetchMyReviews = () => async dispatch => {
+  dispatch({ type: FETCH_MY_REVIEWS });
+
+  const res = await axios.get('/api/reviews');
+
+  dispatch({ type: RECEIVE_MY_REVIEWS, payload: res.data });
 };

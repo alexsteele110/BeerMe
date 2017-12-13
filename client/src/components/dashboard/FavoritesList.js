@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from 'material-ui/styles';
 import { fetchFavorites } from '../../actions';
 import List, {
@@ -9,15 +9,21 @@ import List, {
   ListItemSecondaryAction,
   ListItemText
 } from 'material-ui/List';
+import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
-import IconButton from 'material-ui/IconButton';
-import InfoOutlineIcon from 'material-ui-icons/InfoOutline';
-import DeleteIcon from 'material-ui-icons/Delete';
+import FavoriteIcon from 'material-ui-icons/Favorite';
+import KeyboardArrowRightIcon from 'material-ui-icons/KeyboardArrowRight';
 import ReviewDialog from '../reviews/ReviewDialog';
 
 const styles = theme => ({
   demo: {
     background: theme.palette.background.paper
+  },
+  heart: {
+    color: '#C95353',
+    height: 40,
+    width: 40,
+    marginRight: 30
   }
 });
 
@@ -40,21 +46,22 @@ class FavoritesList extends Component {
 
     return data.map(favorite => {
       return (
-        <ListItem button key={favorite._id}>
+        <ListItem
+          button
+          onClick={() => {
+            this.props.history.push(`/beer/${favorite.beerId}`);
+          }}
+          key={favorite._id}
+        >
           <ListItemIcon>
-            <ReviewDialog beerId={favorite.beerId} />
+            <KeyboardArrowRightIcon />
           </ListItemIcon>
           <ListItemText
             primary={favorite.beerName}
             secondary={favorite.breweryName}
           />
           <ListItemSecondaryAction>
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
-            <IconButton component={Link} to={`/beer/${favorite.beerId}`}>
-              <InfoOutlineIcon />
-            </IconButton>
+            <ReviewDialog beerId={favorite.beerId} />
           </ListItemSecondaryAction>
         </ListItem>
       );
@@ -66,6 +73,13 @@ class FavoritesList extends Component {
     return (
       <div className={classes.demo}>
         <List dense={this.state.dense}>
+          <ListItem>
+            <Typography type="display1">
+              <FavoriteIcon className={classes.heart} />
+              <b>My Favorites</b>
+            </Typography>
+          </ListItem>
+          <Divider />
           {this.renderFavorites()}
         </List>
       </div>
@@ -78,5 +92,5 @@ function mapStateToProps({ favorites }) {
 }
 
 export default connect(mapStateToProps, { fetchFavorites })(
-  withStyles(styles)(FavoritesList)
+  withStyles(styles)(withRouter(FavoritesList))
 );

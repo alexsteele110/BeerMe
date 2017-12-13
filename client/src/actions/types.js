@@ -9,3 +9,5 @@ export const FETCH_FAVORITES = 'fetch-favorites';
 export const RECEIVE_SUGGESTED = 'receive-suggested';
 export const RECEIVE_FAVORITES = 'receive-favorites';
 export const RECEIVE_REVIEWS = 'receive-reviews';
+export const FETCH_MY_REVIEWS = 'fetch-myreviews';
+export const RECEIVE_MY_REVIEWS = 'receive-myreviews';

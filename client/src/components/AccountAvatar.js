@@ -9,7 +9,8 @@ import { withStyles } from 'material-ui/styles';
 import { Manager, Target, Popper } from 'react-popper';
 import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
 import Avatar from 'material-ui/Avatar';
-import deepPurple from 'material-ui/colors/deepPurple';
+import AccountCircleIcon from 'material-ui-icons/AccountCircle';
+import blue from 'material-ui/colors/blue';
 
 const styles = {
   root: {
@@ -22,7 +23,7 @@ const styles = {
     margin: 10,
     marginRight: 20,
     color: '#fff',
-    backgroundColor: deepPurple[400],
+    backgroundColor: blue[300],
     '&:hover': {
       cursor: 'pointer'
     }
@@ -62,7 +63,7 @@ class AccountAvatar extends Component {
               aria-haspopup="true"
               onClick={this.handleClick}
             >
-              AS
+              <AccountCircleIcon />
             </Avatar>
           </Target>
           <Popper

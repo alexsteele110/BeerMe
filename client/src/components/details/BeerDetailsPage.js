@@ -8,7 +8,11 @@ import Suggestions from './Suggestions';
 import ReviewsList from './ReviewsList';
 
 function TabContainer(props) {
-  return <div style={{ padding: 8 * 3 }}>{props.children}</div>;
+  return (
+    <div style={{ padding: 8 * 3 }}>
+      {props.children}
+    </div>
+  );
 }
 
 TabContainer.propTypes = {
@@ -48,27 +52,24 @@ class BeerDetailsPage extends Component {
     return (
       <div className={classes.root}>
         <AppBar className={classes.tabBar}>
-          <Tabs value={value} onChange={this.handleChange}>
+          <Tabs value={value} onChange={this.handleChange} centered>
             <Tab label="Overview" />
             <Tab label="Suggestions" />
             <Tab label="Reviews" href="#basic-tabs" />
           </Tabs>
         </AppBar>
-        {value === 0 && (
+        {value === 0 &&
           <TabContainer>
             <BeerCard beerId={beerId} />
-          </TabContainer>
-        )}
-        {value === 1 && (
+          </TabContainer>}
+        {value === 1 &&
           <TabContainer>
             <Suggestions beerId={beerId} />
-          </TabContainer>
-        )}
-        {value === 2 && (
+          </TabContainer>}
+        {value === 2 &&
           <TabContainer>
             <ReviewsList beerId={beerId} />
-          </TabContainer>
-        )}
+          </TabContainer>}
       </div>
     );
   }
