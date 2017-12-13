@@ -13,7 +13,7 @@ class SimpleSnackbar extends Component {
   };
 
   handleClick = async () => {
-    const { data } = this.props.beerDetails.info;
+    const { data } = this.props.beerDetails;
 
     await this.props.updateFavorites(data);
     this.setState({ open: true });
@@ -28,7 +28,7 @@ class SimpleSnackbar extends Component {
   };
 
   decideContent = (inFavs, notInFavs) => {
-    const { id } = this.props.beerDetails.info.data;
+    const { id } = this.props.beerDetails.data;
     const { favoriteBeers } = this.props.auth;
     const inFavorites = favoriteBeers.includes(id);
 

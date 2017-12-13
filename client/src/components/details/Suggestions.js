@@ -34,8 +34,8 @@ class Suggestions extends Component {
   renderGlassDetails() {
     const { classes, beerDetails } = this.props;
 
-    if (!beerDetails.isFetching && beerDetails.info.data.glasswareId) {
-      const { glasswareId } = this.props.beerDetails.info.data;
+    if (!beerDetails.isFetching && beerDetails.data.glasswareId) {
+      const { glasswareId } = this.props.beerDetails.data;
       return (
         <div>
           <Card className={classes.card}>

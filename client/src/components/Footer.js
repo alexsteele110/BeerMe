@@ -42,7 +42,7 @@ function Footer(props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img src="https://i.imgur.com/yfWEKaX.png" alt="" />
+          <img src="https://i.imgur.com/yfWEKaX.png" alt="GitHub" />
         </a>
       </Paper>
     </div>

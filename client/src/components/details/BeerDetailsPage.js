@@ -51,7 +51,7 @@ class BeerDetailsPage extends Component {
     await this.props.fetchBeerDetails(beerId);
     this.props.fetchBeerReviews(beerId);
 
-    const { styleId } = this.props.beerDetails.info.data;
+    const { styleId } = this.props.beerDetails.data;
     this.props.fetchSuggestedBeers(styleId);
   }
 

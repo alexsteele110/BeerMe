@@ -60,9 +60,8 @@ class BeerCard extends Component {
   };
 
   renderCard = () => {
-    console.log(this.props);
     const { classes, auth } = this.props;
-    const { data } = this.props.beerDetails.info;
+    const { data } = this.props.beerDetails;
     const altImage = 'https://i.imgur.com/YrNKcpR.png';
 
     return (

@@ -89,14 +89,11 @@ class BeersList extends Component {
 }
 
 BeersList.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
 };
 
 function mapStateToProps({ results, suggested }) {
   return { results, suggested };
 }
 
-export default withStyles(styles, { withTheme: true })(
-  connect(mapStateToProps)(BeersList)
-);
+export default withStyles(styles)(connect(mapStateToProps)(BeersList));

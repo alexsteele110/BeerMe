@@ -1,7 +1,7 @@
 import { FETCH_BEER_DETAILS, RECEIVE_BEER_DETAILS } from '../actions/types';
 
 const initialState = {
-  info: {},
+  data: {},
   isFetching: false
 };
 
@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        info: action.payload
+        data: action.payload
       };
     default:
       return state;

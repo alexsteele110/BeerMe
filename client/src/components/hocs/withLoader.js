@@ -6,9 +6,13 @@ export default (ChildComponent, category) => {
   class withLoader extends Component {
     render() {
       const { auth } = this.props;
-      console.log(this.props);
-      if (auth === null || this.props[category].isFetching) {
+      const { isFetching, data } = this.props[category];
+
+      if (auth === null || isFetching) {
         return <CircularProgress />;
+      }
+      if (data.length === 0) {
+        return <h4>No results</h4>;
       }
       return <ChildComponent {...this.props} />;
     }
