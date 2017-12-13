@@ -46,7 +46,7 @@ class BeerDetailsPage extends Component {
     value: 0
   };
 
-  async componentDidMount() {
+  async componentWillMount() {
     const { beerId } = this.props.match.params;
     await this.props.fetchBeerDetails(beerId);
     this.props.fetchBeerReviews(beerId);

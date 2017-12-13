@@ -34,7 +34,7 @@ class ReviewsList extends Component {
   renderReviews = () => {
     const { data } = this.props.reviews;
 
-    if (data[0] === 'None found') {
+    if (data.length === 0) {
       return <h3>No reviews yet.</h3>;
     }
 

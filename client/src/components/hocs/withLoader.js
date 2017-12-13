@@ -6,6 +6,7 @@ export default (ChildComponent, category) => {
   class withLoader extends Component {
     render() {
       const { auth } = this.props;
+      console.log(this.props);
       if (auth === null || this.props[category].isFetching) {
         return <CircularProgress />;
       }

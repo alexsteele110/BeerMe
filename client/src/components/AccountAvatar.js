@@ -1,32 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { MenuItem, MenuList } from 'material-ui/Menu';
-import Grow from 'material-ui/transitions/Grow';
-import Paper from 'material-ui/Paper';
+import Menu, { MenuItem } from 'material-ui/Menu';
+import IconButton from 'material-ui/IconButton';
 import { withStyles } from 'material-ui/styles';
-import { Manager, Target, Popper } from 'react-popper';
-import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
-import Avatar from 'material-ui/Avatar';
 import AccountCircleIcon from 'material-ui-icons/AccountCircle';
-import blue from 'material-ui/colors/blue';
 
 const styles = {
-  root: {
-    display: 'flex'
-  },
-  popperClose: {
-    pointerEvents: 'none'
-  },
-  purpleAvatar: {
-    margin: 10,
-    marginRight: 20,
-    color: '#fff',
-    backgroundColor: blue[300],
-    '&:hover': {
-      cursor: 'pointer'
-    }
+  avatar: {
+    marginRight: 36,
+    height: 36,
+    width: 36,
+    color: '#fff'
   },
   link: {
     textDecoration: 'none',
@@ -36,68 +21,49 @@ const styles = {
 
 class AccountAvatar extends Component {
   state = {
+    anchorEl: null,
     open: false
   };
 
-  handleClick = () => {
-    this.setState({ open: true });
+  handleClick = event => {
+    this.setState({ open: true, anchorEl: event.currentTarget });
   };
 
   handleRequestClose = () => {
     this.setState({ open: false });
   };
 
-  handleLogout = () => {};
-
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
-
     return (
-      <div className={classes.root}>
-        <Manager>
-          <Target>
-            <Avatar
-              className={classes.purpleAvatar}
-              aria-owns={this.state.open ? 'menu-list' : null}
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              <AccountCircleIcon />
-            </Avatar>
-          </Target>
-          <Popper
-            placement="left-start"
-            eventsEnabled={open}
-            className={classNames({ [classes.popperClose]: !open })}
+      <div>
+        <IconButton
+          aria-owns={this.state.open ? 'simple-menu' : null}
+          aria-haspopup="true"
+          onClick={this.handleClick}
+        >
+          <AccountCircleIcon className={classes.avatar} />
+        </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={this.state.anchorEl}
+          open={this.state.open}
+          onRequestClose={this.handleRequestClose}
+        >
+          <MenuItem
+            component={Link}
+            to="/dashboard"
+            onClick={this.handleRequestClose}
           >
-            <ClickAwayListener onClickAway={this.handleRequestClose}>
-              <Grow
-                in={open}
-                id="menu-list"
-                style={{ transformOrigin: '0 0 0' }}
-              >
-                <Paper>
-                  <MenuList role="menu">
-                    <MenuItem onClick={this.handleRequestClose}>
-                      Profile
-                    </MenuItem>
-                    <MenuItem onClick={this.handleRequestClose}>
-                      <Link to="/dashboard" className={classes.link}>
-                        My account
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <a href="/api/logout" className={classes.link}>
-                        Logout
-                      </a>
-                    </MenuItem>
-                  </MenuList>
-                </Paper>
-              </Grow>
-            </ClickAwayListener>
-          </Popper>
-        </Manager>
+            My account
+          </MenuItem>
+          <MenuItem onClick={this.handleRequestClose}>Settings</MenuItem>
+          <MenuItem>
+            <a className={classes.link} href="/api/logout">
+              Logout
+            </a>
+          </MenuItem>
+        </Menu>
       </div>
     );
   }
@@ -108,5 +74,3 @@ AccountAvatar.propTypes = {
 };
 
 export default withStyles(styles)(AccountAvatar);
-
-// <Avatar className={classes.purpleAvatar}>A</Avatar>

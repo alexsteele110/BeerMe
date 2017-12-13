@@ -5,11 +5,11 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
-import KeyboardArrowDownIcon from 'material-ui-icons/KeyboardArrowDown';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import RateReviewIcon from 'material-ui-icons/RateReview';
 import FindInPageIcon from 'material-ui-icons/FindInPage';
 import Typography from 'material-ui/Typography';
+import Footer from './Footer';
 
 const styles = theme => ({
   root: {
@@ -23,21 +23,16 @@ const styles = theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     background: 'url(https://i.imgur.com/6ZeEIeM.jpg)',
-    height: 400,
+    height: 270,
     width: '100%',
-    paddingTop: 200,
+    paddingTop: 100,
     backgroundAttachment: 'fixed',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
   },
   button: {
-    margin: theme.spacing.unit
-  },
-  fab: {
-    float: 'right',
-    right: '8%',
-    top: -30
+    margin: theme.spacing.unit * 3
   },
   greeting: {
     color: 'white',
@@ -74,9 +69,6 @@ function Landing(props) {
           Get Started
         </Button>
       </Paper>
-      <Button className={classes.fab} fab color="accent">
-        <KeyboardArrowDownIcon />
-      </Button>
 
       <div className={classes.root}>
         <Grid container justify="center" spacing={24}>
@@ -117,7 +109,7 @@ function Landing(props) {
           <Grid item xs={12} md={4}>
             <div className={classes.container}>
               <FindInPageIcon
-                style={{ color: '#4668B2' }}
+                style={{ color: '#64b5f6' }}
                 className={classes.largeIcon}
               />
               <Typography type="headline" gutterBottom>
@@ -149,6 +141,7 @@ function Landing(props) {
         </Grid>
         <Divider />
       </div>
+      <Footer />
     </div>
   );
 }

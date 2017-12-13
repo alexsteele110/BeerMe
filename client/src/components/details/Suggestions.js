@@ -24,7 +24,7 @@ class Suggestions extends Component {
     return (
       <div>
         <Typography type="display1" gutterBottom>
-          Similar beers:
+          Similar
         </Typography>
         <BeersList listType="suggested" />
       </div>
