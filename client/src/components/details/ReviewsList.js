@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchBeerReviews } from '../../actions';
 import { withStyles } from 'material-ui/styles';
+import withLoader from '../hocs/withLoader';
 import Rating from 'react-rating';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
-import { CircularProgress } from 'material-ui/Progress';
 import ThumbUpIcon from 'material-ui-icons/ThumbUp';
 import StarBorderIcon from 'material-ui-icons/StarBorder';
 import StarIcon from 'material-ui-icons/Star';
@@ -31,20 +31,8 @@ const styles = {
 };
 
 class ReviewsList extends Component {
-  componentDidMount() {
-    const { beerId } = this.props;
-    const { data } = this.props.reviews;
-    // figure out how to account for None found scenario
-    if (data.length === 0 || data[0].beerId !== beerId) {
-      this.props.fetchBeerReviews(beerId);
-    }
-  }
   renderReviews = () => {
-    const { isFetching, data } = this.props.reviews;
-
-    if (isFetching) {
-      return <CircularProgress />;
-    }
+    const { data } = this.props.reviews;
 
     if (data[0] === 'None found') {
       return <h3>No reviews yet.</h3>;
@@ -95,5 +83,5 @@ function mapStateToProps({ reviews }) {
 }
 
 export default connect(mapStateToProps, { fetchBeerReviews })(
-  withStyles(styles)(ReviewsList)
+  withStyles(styles)(withLoader(ReviewsList, 'reviews'))
 );

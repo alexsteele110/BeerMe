@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSuggestedBeers } from '../../actions';
 import { withStyles } from 'material-ui/styles';
+import withLoader from '../hocs/withLoader';
 import Typography from 'material-ui/Typography';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Grid from 'material-ui/Grid';
-import { CircularProgress } from 'material-ui/Progress';
 import BeersList from '../BeersList';
 import glasses from './glasses';
 
@@ -20,22 +20,7 @@ const styles = theme => ({
 });
 
 class Suggestions extends Component {
-  componentDidMount() {
-    const { styleId } = this.props.beerDetails.info.data;
-    const { data } = this.props.suggested;
-
-    if (data.length === 0 || data[0].styleId !== styleId) {
-      this.props.fetchSuggestedBeers(styleId);
-    }
-  }
-
   renderBeers() {
-    const { isFetching } = this.props.suggested;
-
-    if (isFetching) {
-      return <CircularProgress />;
-    }
-
     return (
       <div>
         <Typography type="display1" gutterBottom>
@@ -47,10 +32,10 @@ class Suggestions extends Component {
   }
 
   renderGlassDetails() {
-    const { classes } = this.props;
-    const { glasswareId } = this.props.beerDetails.info.data;
+    const { classes, beerDetails } = this.props;
 
-    if (glasswareId) {
+    if (!beerDetails.isFetching && beerDetails.info.data.glasswareId) {
+      const { glasswareId } = this.props.beerDetails.info.data;
       return (
         <div>
           <Card className={classes.card}>
@@ -99,5 +84,5 @@ function mapStateToProps({ beerDetails, suggested }) {
 }
 
 export default connect(mapStateToProps, { fetchSuggestedBeers })(
-  withStyles(styles)(Suggestions)
+  withStyles(styles)(withLoader(Suggestions, 'suggested'))
 );

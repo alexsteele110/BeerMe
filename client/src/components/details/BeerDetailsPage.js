@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+  fetchBeerDetails,
+  fetchBeerReviews,
+  fetchSuggestedBeers
+} from '../../actions';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
@@ -40,6 +46,15 @@ class BeerDetailsPage extends Component {
     value: 0
   };
 
+  async componentDidMount() {
+    const { beerId } = this.props.match.params;
+    await this.props.fetchBeerDetails(beerId);
+    this.props.fetchBeerReviews(beerId);
+
+    const { styleId } = this.props.beerDetails.info.data;
+    this.props.fetchSuggestedBeers(styleId);
+  }
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -47,7 +62,6 @@ class BeerDetailsPage extends Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-    const { beerId } = this.props.match.params;
 
     return (
       <div className={classes.root}>
@@ -60,15 +74,15 @@ class BeerDetailsPage extends Component {
         </AppBar>
         {value === 0 &&
           <TabContainer>
-            <BeerCard beerId={beerId} />
+            <BeerCard />
           </TabContainer>}
         {value === 1 &&
           <TabContainer>
-            <Suggestions beerId={beerId} />
+            <Suggestions />
           </TabContainer>}
         {value === 2 &&
           <TabContainer>
-            <ReviewsList beerId={beerId} />
+            <ReviewsList />
           </TabContainer>}
       </div>
     );
@@ -79,4 +93,12 @@ BeerDetailsPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(BeerDetailsPage);
+function mapStateToProps({ beerDetails }) {
+  return { beerDetails };
+}
+
+export default connect(mapStateToProps, {
+  fetchBeerDetails,
+  fetchBeerReviews,
+  fetchSuggestedBeers
+})(withStyles(styles)(BeerDetailsPage));

@@ -36,7 +36,7 @@ module.exports = app => {
     }
     res.send(reviews);
   });
-
+  // retrieve all routes made by particular user
   app.get('/api/reviews', requireLogin, async (req, res) => {
     const _user = req.user.id;
     const reviews = await Review.find({ _user });
