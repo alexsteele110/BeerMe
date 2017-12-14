@@ -9,14 +9,17 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 
 class SimpleSnackbar extends Component {
   state = {
-    open: false
+    open: false,
+    inFavorites: this.props.auth.favoriteBeers.includes(
+      this.props.beerDetails.data.id
+    )
   };
 
-  handleClick = async () => {
+  handleClick = () => {
     const { data } = this.props.beerDetails;
+    this.props.updateFavorites(data);
 
-    await this.props.updateFavorites(data);
-    this.setState({ open: true });
+    this.setState({ open: true, inFavorites: !this.state.inFavorites });
   };
 
   handleRequestClose = (event, reason) => {
@@ -27,15 +30,8 @@ class SimpleSnackbar extends Component {
     this.setState({ open: false });
   };
 
-  decideContent = (inFavs, notInFavs) => {
-    const { id } = this.props.beerDetails.data;
-    const { favoriteBeers } = this.props.auth;
-    const inFavorites = favoriteBeers.includes(id);
-
-    return inFavorites ? inFavs : notInFavs;
-  };
-
   render() {
+    const { inFavorites } = this.state;
     return (
       <div>
         <Tooltip
@@ -44,10 +40,9 @@ class SimpleSnackbar extends Component {
           enterDelay={300}
         >
           <IconButton onClick={this.handleClick}>
-            {this.decideContent(
-              <FavoriteIcon style={{ color: '#C95353' }} />,
-              <FavoriteBorderIcon />
-            )}
+            {inFavorites
+              ? <FavoriteIcon style={{ color: '#C95353' }} />
+              : <FavoriteBorderIcon />}
           </IconButton>
         </Tooltip>
         <Snackbar
@@ -63,10 +58,7 @@ class SimpleSnackbar extends Component {
           }}
           message={
             <span id="message-id">
-              {this.decideContent(
-                'Added to favorites',
-                'Removed from favorites'
-              )}
+              {inFavorites ? 'Added to favorites' : 'Removed from favorites'}
             </span>
           }
         />

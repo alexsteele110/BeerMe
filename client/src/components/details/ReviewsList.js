@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { fetchBeerReviews } from '../../actions';
 import { withStyles } from 'material-ui/styles';
 import withLoader from '../hocs/withLoader';
+import ThumbsUp from '../reviews/ThumbsUp';
 import Rating from 'react-rating';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import Typography from 'material-ui/Typography';
-import ThumbUpIcon from 'material-ui-icons/ThumbUp';
 import StarBorderIcon from 'material-ui-icons/StarBorder';
 import StarIcon from 'material-ui-icons/Star';
 
@@ -33,7 +33,6 @@ const styles = {
 class ReviewsList extends Component {
   renderReviews = () => {
     const { data } = this.props.reviews;
-    console.log(this.props);
 
     return data.map(review => {
       const { classes } = this.props;
@@ -55,7 +54,7 @@ class ReviewsList extends Component {
             <Divider />
             <Typography type="caption">
               <b>{review.displayName}</b> on {dateCreated} | Helpful?{' '}
-              <ThumbUpIcon className={classes.thumb} /> {review.helpful}
+              <ThumbsUp review={review} />
             </Typography>
           </Paper>
         </Grid>
