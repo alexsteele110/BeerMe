@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 
+const User = mongoose.model('users');
 const Review = mongoose.model('reviews');
 
 module.exports = app => {
@@ -42,5 +43,29 @@ module.exports = app => {
       res.send(reviews);
     }
     res.send(reviews);
+  });
+
+  app.post('/api/reviews/:reviewId', requireLogin, async (req, res) => {
+    const { reviewId } = req.params;
+    const alreadyLiked = req.user.liked.includes(reviewId);
+
+    try {
+      const user = await User.findByIdAndUpdate(
+        req.user.id,
+        alreadyLiked
+          ? { $pull: { liked: reviewId } }
+          : { $push: { liked: reviewId } },
+        { new: true }
+      );
+
+      const review = await Review.findByIdAndUpdate(
+        reviewId,
+        alreadyLiked ? { $inc: { helpful: -1 } } : { $inc: { helpful: 1 } },
+        { new: true }
+      );
+      res.send(user);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 };

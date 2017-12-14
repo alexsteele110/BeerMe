@@ -33,10 +33,7 @@ const styles = {
 class ReviewsList extends Component {
   renderReviews = () => {
     const { data } = this.props.reviews;
-
-    if (data.length === 0) {
-      return <h3>No reviews yet.</h3>;
-    }
+    console.log(this.props);
 
     return data.map(review => {
       const { classes } = this.props;
