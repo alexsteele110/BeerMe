@@ -2,7 +2,8 @@ import { FETCH_BEER_DETAILS, RECEIVE_BEER_DETAILS } from '../actions/types';
 
 const initialState = {
   data: {},
-  isFetching: false
+  isFetching: false,
+  inFavorites: null
 };
 
 export default function(state = initialState, action) {
@@ -13,10 +14,12 @@ export default function(state = initialState, action) {
         isFetching: true
       };
     case RECEIVE_BEER_DETAILS:
+      const { data, inFavorites } = action.payload;
       return {
         ...state,
         isFetching: false,
-        data: action.payload
+        inFavorites,
+        data
       };
     default:
       return state;

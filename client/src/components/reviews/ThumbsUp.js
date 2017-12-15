@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateHelpful } from '../../actions';
+import { withStyles } from 'material-ui/styles';
+import Tooltip from 'material-ui/Tooltip';
 import IconButton from 'material-ui/IconButton';
 import ThumbUpIcon from 'material-ui-icons/ThumbUp';
+
+const styles = theme => ({
+  liked: {
+    color: '#64b5f6',
+    marginLeft: '90%',
+    marginTop: -44
+  },
+  unLiked: {
+    marginLeft: '90%',
+    marginTop: -44
+  },
+  number: {
+    marginLeft: 10
+  }
+});
 
 class ThumbsUp extends Component {
   state = {
     helpfulCount: this.props.review.helpful,
-    alreadyLiked: this.props.auth.liked.includes(this.props.reviewId)
+    alreadyLiked: this.props.auth.liked.includes(this.props.review._id)
   };
 
   handleClick = () => {
@@ -22,20 +39,27 @@ class ThumbsUp extends Component {
   };
 
   renderIcon() {
+    const { classes } = this.props;
+    const { alreadyLiked } = this.state;
     return (
       <div>
-        <IconButton onClick={this.handleClick}>
-          <ThumbUpIcon />
-        </IconButton>
-        <h3>
-          {this.state.helpfulCount}
-        </h3>
+        <Tooltip title="Helpful?" placement="bottom" enterDelay={300}>
+          <IconButton
+            onClick={this.handleClick}
+            className={alreadyLiked ? classes.liked : classes.unLiked}
+          >
+            <ThumbUpIcon />
+
+            <h6 className={classes.number}>
+              {this.state.helpfulCount}
+            </h6>
+          </IconButton>
+        </Tooltip>
       </div>
     );
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         {this.renderIcon()}
@@ -48,4 +72,6 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps, { updateHelpful })(ThumbsUp);
+export default connect(mapStateToProps, { updateHelpful })(
+  withStyles(styles)(ThumbsUp)
+);

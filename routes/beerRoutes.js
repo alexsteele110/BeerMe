@@ -30,7 +30,10 @@ module.exports = app => {
 
     try {
       const response = await axios.get(url);
-      res.send(response.data.data);
+      const { data } = response.data;
+      const inFavorites = req.user.favoriteBeers.includes(data.id);
+
+      res.send({ data, inFavorites });
     } catch (err) {
       res.send(err);
     }

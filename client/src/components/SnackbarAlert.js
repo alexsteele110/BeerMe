@@ -10,9 +10,7 @@ import FavoriteIcon from 'material-ui-icons/Favorite';
 class SimpleSnackbar extends Component {
   state = {
     open: false,
-    inFavorites: this.props.auth.favoriteBeers.includes(
-      this.props.beerDetails.data.id
-    )
+    inFavorites: this.props.beerDetails.inFavorites
   };
 
   handleClick = () => {

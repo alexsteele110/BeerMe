@@ -20,13 +20,14 @@ const styles = {
   paper: {
     padding: 24
   },
-  thumb: {
-    height: 22,
-    width: 20,
-    float: 'right'
+  divider: {
+    margin: '16px 0px'
   },
   star: {
     color: '#EC8C19'
+  },
+  description: {
+    marginTop: 16
   }
 };
 
@@ -39,21 +40,22 @@ class ReviewsList extends Component {
       const dateCreated = new Date(review.dateCreated).toLocaleDateString();
 
       return (
-        <Grid item xs={12} md={6} lg={4} key={review._id}>
+        <Grid item xs={12} md={6} key={review._id}>
           <Paper className={classes.paper}>
             <Rating
+              className={classes.star}
               initialRate={review.rating}
               readonly
-              empty={<StarBorderIcon className={classes.star} />}
-              full={<StarIcon className={classes.star} />}
+              empty={<StarBorderIcon />}
+              full={<StarIcon />}
             />
 
-            <Typography type="body1">
+            <Typography className={classes.description} type="body1">
               {review.description}
             </Typography>
-            <Divider />
+            <Divider className={classes.divider} />
             <Typography type="caption">
-              <b>{review.displayName}</b> on {dateCreated} | Helpful?{' '}
+              <b>{review.displayName}</b> on {dateCreated}
               <ThumbsUp review={review} />
             </Typography>
           </Paper>

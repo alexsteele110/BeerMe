@@ -38,10 +38,6 @@ module.exports = app => {
     const _user = req.user.id;
     const reviews = await Review.find({ _user });
 
-    if (reviews.length === 0) {
-      reviews.push('None found');
-      res.send(reviews);
-    }
     res.send(reviews);
   });
 
