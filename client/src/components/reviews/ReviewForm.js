@@ -24,7 +24,7 @@ const validate = values => {
   }
   if (!values.description) {
     errors.description = 'Review required';
-  } else if (values.description.length > 300) {
+  } else if (values.description.length > 600) {
     errors.description = '300 characters or less';
   }
   return errors;

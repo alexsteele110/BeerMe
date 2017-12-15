@@ -18,6 +18,11 @@ import ReviewForm from './ReviewForm';
 const styles = theme => ({
   clickable: {
     color: '#3E997E'
+  },
+  close: {
+    float: 'right',
+    marginTop: -24,
+    marginRight: -24
   }
 });
 
@@ -68,7 +73,10 @@ class ReviewDialog extends Component {
           <Dialog open={this.state.dialogOpen}>
             <DialogTitle>
               Review this beer
-              <IconButton onClick={this.handleRequestClose}>
+              <IconButton
+                className={classes.close}
+                onClick={this.handleRequestClose}
+              >
                 <CloseIcon />
               </IconButton>
             </DialogTitle>
