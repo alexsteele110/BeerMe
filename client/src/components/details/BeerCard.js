@@ -4,6 +4,7 @@ import { fetchBeerDetails } from '../../actions';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
+import Rating from 'react-rating';
 import Grid from 'material-ui/Grid';
 import Card, {
   CardHeader,
@@ -16,6 +17,8 @@ import IconButton from 'material-ui/IconButton';
 import Chip from 'material-ui/Chip';
 import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
+import StarBorderIcon from 'material-ui-icons/StarBorder';
+import StarIcon from 'material-ui-icons/Star';
 import ReviewDialog from '../reviews/ReviewDialog';
 import SnackbarAlert from '../SnackbarAlert';
 import withLoader from '../hocs/withLoader';
@@ -49,6 +52,12 @@ const styles = theme => ({
   },
   flexGrow: {
     flex: '1 1 auto'
+  },
+  rating: {
+    float: 'right',
+    color: '#EC8C19',
+    marginTop: -70,
+    marginRight: 16
   }
 });
 
@@ -58,6 +67,31 @@ class BeerCard extends Component {
   handleExpandClick = () => {
     this.setState({ expanded: !this.state.expanded });
   };
+
+  getUserRating() {
+    const { data } = this.props.reviews;
+    const { classes } = this.props;
+    let total = 0;
+
+    data.forEach(review => (total += review.rating));
+    const userRating = Math.round(total / data.length);
+
+    return (
+      <div className={classes.rating}>
+        <Rating
+          initialRate={data.length === 0 ? 0 : userRating}
+          readonly
+          empty={<StarBorderIcon />}
+          full={<StarIcon />}
+        />
+        <Typography type="caption">
+          {data.length === 0
+            ? 'No reviews yet'
+            : `Based on ${data.length} review(s)`}
+        </Typography>
+      </div>
+    );
+  }
 
   renderCard = () => {
     const { classes, auth } = this.props;
@@ -69,6 +103,7 @@ class BeerCard extends Component {
         <Grid item xs={12} md={5}>
           <Card>
             <CardHeader title={data.name} subheader={data.breweries[0].name} />
+            {this.getUserRating()}
             <CardMedia
               className={classes.media}
               image={data.labels ? data.labels.large : altImage}
@@ -137,8 +172,8 @@ BeerCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-function mapStateToProps({ beerDetails, auth }) {
-  return { beerDetails, auth };
+function mapStateToProps({ beerDetails, auth, reviews }) {
+  return { beerDetails, auth, reviews };
 }
 
 export default connect(mapStateToProps, { fetchBeerDetails })(

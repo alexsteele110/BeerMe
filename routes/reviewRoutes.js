@@ -41,6 +41,12 @@ module.exports = app => {
     res.send(reviews);
   });
 
+  app.get('/api/reviews/all', async (req, res) => {
+    const reviews = await Review.find({});
+
+    res.send(reviews);
+  });
+
   app.post('/api/reviews/:reviewId', requireLogin, async (req, res) => {
     const { reviewId } = req.params;
     const alreadyLiked = req.user.liked.includes(reviewId);
