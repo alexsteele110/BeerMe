@@ -33,10 +33,11 @@ class ReviewDialog extends Component {
   };
 
   submit = values => {
-    const { beerId } = this.props;
+    const { id, name } = this.props.beerData;
     const serializedDescription = serialize(values.description);
     const review = {
-      beerId,
+      beerId: id,
+      beerName: name,
       rating: values.rating,
       description: serializedDescription
     };
@@ -59,8 +60,9 @@ class ReviewDialog extends Component {
   };
 
   render() {
-    const { auth, beerId, classes } = this.props;
-    const allowedToReview = auth.reviewed.includes(beerId);
+    const { auth, classes } = this.props;
+    const { id } = this.props.beerData;
+    const allowedToReview = auth.reviewed.includes(id);
 
     if (!allowedToReview) {
       return (

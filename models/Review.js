@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const reviewSchema = new Schema({
   beerId: String,
+  beerName: String,
   rating: { type: Number, min: 0, max: 5 },
   description: String,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },

@@ -121,7 +121,7 @@ class BeerCard extends Component {
             </CardContent>
             <CardActions>
               {auth ? <SnackbarAlert /> : ''}
-              <ReviewDialog beerId={data.id} />
+              <ReviewDialog beerData={data} />
               <div className={classes.flexGrow} />
               <IconButton
                 className={classnames(classes.expand, {
