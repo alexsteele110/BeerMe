@@ -81,9 +81,16 @@ export const fetchMyReviews = () => async dispatch => {
   dispatch({ type: RECEIVE_MY_REVIEWS, payload: res.data });
 };
 
+export const fetchAllReviews = () => async dispatch => {
+  dispatch({ type: FETCH_REVIEWS });
+
+  const res = await axios.get('/api/allReviews');
+
+  dispatch({ type: RECEIVE_REVIEWS, payload: res.data });
+};
+
 export const updateHelpful = reviewId => async dispatch => {
   const res = await axios.post(`/api/reviews/${reviewId}`);
 
-  console.log(res);
   dispatch({ type: FETCH_USER, payload: res.data });
 };

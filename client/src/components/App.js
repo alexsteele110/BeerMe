@@ -7,6 +7,7 @@ import Landing from './Landing';
 import SearchPage from './SearchPage';
 import BeerDetailsPage from './details/BeerDetailsPage';
 import DashboardPage from './dashboard/DashboardPage';
+import ReviewPage from './reviews/ReviewPage';
 
 class App extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route path="/dashboard" component={DashboardPage} />
             <Route path="/search" component={SearchPage} />
+            <Route path="/reviews" component={ReviewPage} />
             <Route path="/beer/:beerId" component={BeerDetailsPage} />
           </div>
         </BrowserRouter>
