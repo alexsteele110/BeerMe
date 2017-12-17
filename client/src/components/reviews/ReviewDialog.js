@@ -60,9 +60,8 @@ class ReviewDialog extends Component {
   };
 
   render() {
-    const { auth, classes } = this.props;
-    const { id } = this.props.beerData;
-    const allowedToReview = auth.reviewed.includes(id);
+    const { auth, classes, beerId, beerName } = this.props;
+    const allowedToReview = auth.reviewed.includes(beerId);
 
     if (!allowedToReview) {
       return (

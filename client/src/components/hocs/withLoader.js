@@ -5,6 +5,7 @@ import { CircularProgress } from 'material-ui/Progress';
 export default (ChildComponent, category) => {
   class withLoader extends Component {
     render() {
+      console.log(category);
       const { auth } = this.props;
       const { isFetching, data } = this.props[category];
 
