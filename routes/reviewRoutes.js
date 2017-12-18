@@ -3,10 +3,12 @@ const requireLogin = require('../middlewares/requireLogin');
 
 const User = mongoose.model('users');
 const Review = mongoose.model('reviews');
+const Stats = mongoose.model('stats');
 
 module.exports = app => {
   app.post('/api/reviews', requireLogin, async (req, res) => {
     const { beerId, beerName, rating, description } = req.body;
+
     const review = new Review({
       beerId,
       beerName,
@@ -17,8 +19,26 @@ module.exports = app => {
       dateCreated: Date.now()
     });
 
+    const stats = new Stats({
+      beerId,
+      beerName,
+      ratings: [rating]
+    });
+
     try {
       await review.save();
+
+      await Stats.findOneAndUpdate(
+        { beerId },
+        { $push: { ratings: rating } },
+        function(err, results) {
+          if (err) return handleError(err);
+          if (results === null) {
+            stats.save();
+          }
+        }
+      );
+
       req.user.reviewed.push(review.beerId);
       const user = await req.user.save();
 
@@ -34,7 +54,7 @@ module.exports = app => {
 
     res.send(reviews);
   });
-  // retrieve all routes made by particular user
+  // retrieve all reviews made by particular user
   app.get('/api/reviews', requireLogin, async (req, res) => {
     const _user = req.user.id;
     const reviews = await Review.find({ _user });

@@ -3,6 +3,7 @@ const requireLogin = require('../middlewares/requireLogin');
 
 const User = mongoose.model('users');
 const Favorite = mongoose.model('favorites');
+const Stats = mongoose.model('stats');
 
 module.exports = app => {
   app.post('/api/favorites', requireLogin, async (req, res) => {
@@ -23,6 +24,12 @@ module.exports = app => {
       ibu
     });
 
+    const stats = new Stats({
+      beerId: id,
+      beerName: name,
+      numFavs: 1
+    });
+
     try {
       const user = await User.findByIdAndUpdate(
         req.user.id,
@@ -31,9 +38,22 @@ module.exports = app => {
           : { $push: { favoriteBeers: id } },
         { new: true }
       );
+
       inFavorites
         ? await Favorite.remove({ beerId: id, _user: req.user.id })
         : await favorite.save();
+
+      await Stats.findOneAndUpdate(
+        { beerId: id },
+        inFavorites ? { $inc: { numFavs: -1 } } : { $inc: { numFavs: 1 } },
+        function(err, results) {
+          if (err) return handleError(err);
+          if (results === null) {
+            stats.save();
+          }
+        }
+      );
+
       res.send(user);
     } catch (err) {
       res.status(422).send(err);
