@@ -12,7 +12,7 @@ import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 
 const styles = theme => ({
   root: {
-    padding: 16,
+    padding: '7%',
     flexGrow: 1
   },
   paper: {
@@ -62,18 +62,19 @@ class AllReviews extends Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, reviews } = this.props;
+    const totalSteps = Math.ceil(reviews.data.length / 6);
     return (
       <Grid className={classes.root} container spacing={24}>
         <Grid item xs={12}>
           <Paper square elevation={0} className={classes.header}>
             <Typography>
-              Step {this.state.activeStep + 1} of 6
+              Step {this.state.activeStep + 1} of {totalSteps}
             </Typography>
           </Paper>
           <MobileStepper
             type="text"
-            steps={6}
+            steps={totalSteps}
             position="static"
             activeStep={this.state.activeStep}
             className={classes.mobileStepper}
@@ -81,7 +82,7 @@ class AllReviews extends Component {
               <Button
                 dense
                 onClick={this.handleNext}
-                disabled={this.state.activeStep === 5}
+                disabled={this.state.activeStep === totalSteps - 1}
               >
                 Next
                 {theme.direction === 'rtl'
