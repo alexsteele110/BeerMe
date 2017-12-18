@@ -61,7 +61,10 @@ class FavoritesList extends Component {
             secondary={favorite.breweryName}
           />
           <ListItemSecondaryAction>
-            <ReviewDialog beerId={favorite.beerId} />
+            <ReviewDialog
+              beerId={favorite.beerId}
+              beerName={favorite.beerName}
+            />
           </ListItemSecondaryAction>
         </ListItem>
       );

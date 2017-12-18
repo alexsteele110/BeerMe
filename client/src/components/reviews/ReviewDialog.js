@@ -33,11 +33,11 @@ class ReviewDialog extends Component {
   };
 
   submit = values => {
-    const { id, name } = this.props.beerData;
+    const { beerId, beerName } = this.props;
     const serializedDescription = serialize(values.description);
     const review = {
-      beerId: id,
-      beerName: name,
+      beerId,
+      beerName,
       rating: values.rating,
       description: serializedDescription
     };
