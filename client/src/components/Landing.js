@@ -5,11 +5,10 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
-import FavoriteIcon from 'material-ui-icons/Favorite';
-import RateReviewIcon from 'material-ui-icons/RateReview';
-import FindInPageIcon from 'material-ui-icons/FindInPage';
 import Typography from 'material-ui/Typography';
+import ReviewsList from './details/ReviewsList';
 import Footer from './Footer';
+import landingInfo from './landingInfo';
 
 const styles = theme => ({
   root: {
@@ -55,6 +54,23 @@ const styles = theme => ({
 
 function Landing(props) {
   const { classes } = props;
+  const renderInfo = landingInfo.map(({ Icon, description, color, name }) => {
+    return (
+      <Grid item xs={12} md={4}>
+        <div className={classes.container}>
+          <Icon style={{ color }} className={classes.largeIcon} />
+          <Typography type="headline" gutterBottom>
+            <b>
+              {name}
+            </b>
+          </Typography>
+          <Typography type="subheading">
+            {description}
+          </Typography>
+        </div>
+      </Grid>
+    );
+  });
 
   return (
     <div>
@@ -72,72 +88,7 @@ function Landing(props) {
 
       <div className={classes.root}>
         <Grid container justify="center" spacing={24}>
-          <Grid item xs={12} md={4}>
-            <div className={classes.container}>
-              <FavoriteIcon
-                style={{ color: '#C95353' }}
-                className={classes.largeIcon}
-              />
-              <Typography type="headline" gutterBottom>
-                <b>Favorite</b>
-              </Typography>
-              <Typography type="subheading">
-                Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu.
-                Dicat adipisci quaerendum an quo, in nec purto maluisset
-                incorrupte. Virtute civibus iracundia pro id, maiorum recusabo
-                convenire vim ad.
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <div className={classes.container}>
-              <RateReviewIcon
-                style={{ color: '#3E997E' }}
-                className={classes.largeIcon}
-              />
-              <Typography type="headline" gutterBottom>
-                <b>Review</b>
-              </Typography>
-              <Typography type="subheading">
-                Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu.
-                Dicat adipisci quaerendum an quo, in nec purto maluisset
-                incorrupte. Virtute civibus iracundia pro id, maiorum recusabo
-                convenire vim ad.
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <div className={classes.container}>
-              <FindInPageIcon
-                style={{ color: '#64b5f6' }}
-                className={classes.largeIcon}
-              />
-              <Typography type="headline" gutterBottom>
-                <b>Search</b>
-              </Typography>
-              <Typography type="subheading">
-                Sensibus partiendo gloriatur cum ex, sed omnium laoreet eu.
-                Dicat adipisci quaerendum an quo, in nec purto maluisset
-                incorrupte. Virtute civibus iracundia pro id, maiorum recusabo
-                convenire vim ad.
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item sm={12} md={4}>
-            <div className={classes.container}>
-              <img height="100" src="https://i.imgur.com/Yr7LVd0.png" alt="" />
-            </div>
-          </Grid>
-          <Grid item sm={12} md={4}>
-            <div className={classes.container}>
-              <img height="150" src="https://i.imgur.com/6KmeQpG.png" alt="" />
-            </div>
-          </Grid>
-          <Grid item sm={12} md={4}>
-            <div className={classes.container}>
-              <img height="80" src="https://i.imgur.com/BqVae5B.png" alt="" />
-            </div>
-          </Grid>
+          {renderInfo}
         </Grid>
         <Divider />
       </div>

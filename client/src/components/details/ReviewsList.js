@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBeerReviews } from '../../actions';
 import { withStyles } from 'material-ui/styles';
 import withLoader from '../hocs/withLoader';
 import ThumbsUp from '../reviews/ThumbsUp';
@@ -80,6 +79,6 @@ function mapStateToProps({ reviews }) {
   return { reviews };
 }
 
-export default connect(mapStateToProps, { fetchBeerReviews })(
+export default connect(mapStateToProps)(
   withStyles(styles)(withLoader(ReviewsList, 'reviews'))
 );

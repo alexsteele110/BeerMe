@@ -52,6 +52,8 @@ module.exports = app => {
     const { beerId } = req.params;
     const reviews = await Review.find({ beerId });
 
+    // Always want to have most helpful appear first
+    reviews.sort((a, b) => b.helpful - a.helpful);
     res.send(reviews);
   });
   // retrieve all reviews made by particular user
@@ -64,6 +66,14 @@ module.exports = app => {
 
   app.get('/api/allReviews', async (req, res) => {
     const reviews = await Review.find({});
+
+    res.send(reviews);
+  });
+
+  app.get('/api/recentReviews', async (req, res) => {
+    const reviews = await Review.find({});
+
+    reviews.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
 
     res.send(reviews);
   });
