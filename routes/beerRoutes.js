@@ -31,9 +31,13 @@ module.exports = app => {
     try {
       const response = await axios.get(url);
       const { data } = response.data;
-      const inFavorites = req.user.favoriteBeers.includes(data.id);
 
-      res.send({ data, inFavorites });
+      if (req.user) {
+        const inFavorites = req.user.favoriteBeers.includes(data.id);
+        res.send({ data, inFavorites });
+      } else {
+        res.send({ data });
+      }
     } catch (err) {
       res.send(err);
     }

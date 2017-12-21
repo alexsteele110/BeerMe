@@ -96,7 +96,7 @@ class BeerCard extends Component {
   renderCard = () => {
     const { classes, auth } = this.props;
     const { data } = this.props.beerDetails;
-    const altImage = 'https://i.imgur.com/YrNKcpR.png';
+    const altImage = 'https://image.flaticon.com/icons/svg/168/168557.svg';
 
     return (
       <Grid container justify="space-between" spacing={24}>
@@ -111,8 +111,14 @@ class BeerCard extends Component {
             />
             <CardContent>
               <div className={classes.row}>
-                <Chip className={classes.chip} label={`ABV: ${data.abv}%`} />
-                <Chip className={classes.chip} label={`IBU: ${data.ibu}`} />
+                <Chip
+                  className={classes.chip}
+                  label={data.abv ? `ABV: ${data.abv}%` : 'ABV: N/A'}
+                />
+                <Chip
+                  className={classes.chip}
+                  label={data.ibu ? `IBU: ${data.ibu}` : 'IBU: N/A'}
+                />
                 <Chip
                   className={classes.chip}
                   label={`Organic: ${data.isOrganic}`}
@@ -121,7 +127,9 @@ class BeerCard extends Component {
             </CardContent>
             <CardActions>
               {auth ? <SnackbarAlert /> : ''}
-              <ReviewDialog beerId={data.id} beerName={data.name} />
+              {auth
+                ? <ReviewDialog beerId={data.id} beerName={data.name} />
+                : ''}
               <div className={classes.flexGrow} />
               <IconButton
                 className={classnames(classes.expand, {

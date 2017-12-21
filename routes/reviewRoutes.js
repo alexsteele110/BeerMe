@@ -73,9 +73,13 @@ module.exports = app => {
   app.get('/api/recentReviews', async (req, res) => {
     const reviews = await Review.find({});
 
-    reviews.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
+    const recentReviews = reviews.sort(
+      (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+    );
 
-    res.send(reviews);
+    const sixRecentReviews = recentReviews.slice(0, 6);
+
+    res.send(sixRecentReviews);
   });
 
   app.post('/api/reviews/:reviewId', requireLogin, async (req, res) => {

@@ -13,12 +13,12 @@ export default [
     name: 'Review',
     Icon: RateReviewIcon,
     color: '#3E997E',
-    description: 'Write and view detailed reviews that include a rating'
+    description: 'Write and view detailed reviews by other users'
   },
   {
     name: 'Search',
     Icon: FindInPageIcon,
     color: '#64b5f6',
-    description: 'Search for beers you have tried or are looking to try'
+    description: 'Search for beers you have tasted or are looking to try'
   }
 ];

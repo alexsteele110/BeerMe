@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fetchRecentReviews } from '../actions';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
@@ -13,7 +15,7 @@ import landingInfo from './landingInfo';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: 0,
+    margin: 12,
     [theme.breakpoints.up('lg')]: {
       margin: '4% 12%'
     }
@@ -52,53 +54,75 @@ const styles = theme => ({
   }
 });
 
-function Landing(props) {
-  const { classes } = props;
-  const renderInfo = landingInfo.map(({ Icon, description, color, name }) => {
-    return (
-      <Grid item xs={12} md={4}>
-        <div className={classes.container}>
-          <Icon style={{ color }} className={classes.largeIcon} />
-          <Typography type="headline" gutterBottom>
-            <b>
-              {name}
-            </b>
-          </Typography>
-          <Typography type="subheading">
-            {description}
-          </Typography>
-        </div>
-      </Grid>
-    );
-  });
+class Landing extends Component {
+  componentDidMount() {
+    this.props.fetchRecentReviews();
+  }
 
-  return (
-    <div>
-      <Paper className={classes.banner}>
-        <Typography className={classes.greeting} type="display3">
-          BeerMe
-        </Typography>
-        <Typography className={classes.greeting} type="headline">
-          Serving all of your beer and brewery needs
-        </Typography>
-        <Button className={classes.button} raised color="inherit">
-          Get Started
-        </Button>
-      </Paper>
-
-      <div className={classes.root}>
-        <Grid container justify="center" spacing={24}>
-          {renderInfo}
+  renderInfo = () => {
+    const { classes } = this.props;
+    return landingInfo.map(({ Icon, description, color, name }) => {
+      return (
+        <Grid item xs={12} md={4} key={name}>
+          <div className={classes.container}>
+            <Icon style={{ color }} className={classes.largeIcon} />
+            <Typography type="headline" gutterBottom>
+              <b>
+                {name}
+              </b>
+            </Typography>
+            <Typography type="subheading">
+              {description}
+            </Typography>
+          </div>
         </Grid>
-        <Divider />
+      );
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div>
+        <Paper className={classes.banner}>
+          <Typography className={classes.greeting} type="display3">
+            BeerMe
+          </Typography>
+          <Typography className={classes.greeting} type="headline">
+            Serving all of your beer and brewery needs
+          </Typography>
+          <Button className={classes.button} raised color="inherit">
+            Get Started
+          </Button>
+        </Paper>
+
+        <div className={classes.root}>
+          <Grid container justify="center" spacing={24}>
+            {this.renderInfo()}
+            <Grid item xs={12}>
+              <Divider />
+            </Grid>
+            <Grid item xs={12}>
+              <Typography type="display1">Recent reviews</Typography>
+              <ReviewsList showName={true} />
+            </Grid>
+          </Grid>
+        </div>
+
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  );
+    );
+  }
 }
 
 Landing.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Landing);
+function mapStateToProps({ reviews }) {
+  return { reviews };
+}
+
+export default connect(mapStateToProps, { fetchRecentReviews })(
+  withStyles(styles)(Landing)
+);

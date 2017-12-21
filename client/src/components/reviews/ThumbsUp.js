@@ -10,11 +10,17 @@ const styles = theme => ({
   liked: {
     color: '#64b5f6',
     marginLeft: '90%',
-    marginTop: -44
+    marginTop: -44,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: '85%'
+    }
   },
   unLiked: {
     marginLeft: '90%',
-    marginTop: -44
+    marginTop: -44,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: '85%'
+    }
   },
   number: {
     marginLeft: 10

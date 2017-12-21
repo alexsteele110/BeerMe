@@ -38,7 +38,7 @@ class BeersList extends Component {
   renderContent = () => {
     const { classes, listType } = this.props;
     const list = this.props[listType];
-    const altImage = 'https://i.imgur.com/YrNKcpR.png';
+    const altImage = 'https://image.flaticon.com/icons/svg/168/168557.svg';
 
     if (list.isFetching) {
       return <CircularProgress />;
