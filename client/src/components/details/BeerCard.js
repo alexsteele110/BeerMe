@@ -103,7 +103,9 @@ class BeerCard extends Component {
         <Grid item xs={12} md={5}>
           <Card>
             <CardHeader title={data.name} subheader={data.breweries[0].name} />
-            {this.getUserRating()}
+            <div>
+              {this.getUserRating()}
+            </div>
             <CardMedia
               className={classes.media}
               image={data.labels ? data.labels.large : altImage}
@@ -139,7 +141,7 @@ class BeerCard extends Component {
                 aria-expanded={this.state.expanded}
                 aria-label="Show more"
               >
-                <ExpandMoreIcon />
+                {data.description ? <ExpandMoreIcon /> : ''}
               </IconButton>
             </CardActions>
             <Collapse in={this.state.expanded} timeout={700} unmountOnExit>

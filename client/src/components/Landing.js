@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchRecentReviews } from '../actions';
 import { withStyles } from 'material-ui/styles';
@@ -91,8 +92,14 @@ class Landing extends Component {
           <Typography className={classes.greeting} type="headline">
             Serving all of your beer and brewery needs
           </Typography>
-          <Button className={classes.button} raised color="inherit">
-            Get Started
+          <Button
+            component={Link}
+            to="/reviews"
+            className={classes.button}
+            raised
+            color="inherit"
+          >
+            See top beers
           </Button>
         </Paper>
 

@@ -18,14 +18,15 @@ const styles = theme => ({
 });
 
 const validate = values => {
+  console.log(values);
   const errors = {};
   if (!values.rating) {
     errors.description = 'Rating required';
   }
   if (!values.description) {
     errors.description = 'Review required';
-  } else if (values.description.length > 600) {
-    errors.description = '300 characters or less';
+  } else if (values.description.length > 1000) {
+    errors.description = '1,000 characters or less';
   }
   return errors;
 };
@@ -42,7 +43,7 @@ const renderTextField = ({
     helperText={touched && error}
     multiline
     fullWidth
-    rows="4"
+    rows={4}
     {...input}
     {...custom}
   />;

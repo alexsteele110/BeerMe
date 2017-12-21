@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
-import serialize from 'serialize-javascript';
 import { submitReview } from '../../actions';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
@@ -34,12 +33,11 @@ class ReviewDialog extends Component {
 
   submit = values => {
     const { beerId, beerName } = this.props;
-    const serializedDescription = serialize(values.description);
     const review = {
       beerId,
       beerName,
       rating: values.rating,
-      description: serializedDescription
+      description: values.description
     };
 
     this.props.submitReview(review);
