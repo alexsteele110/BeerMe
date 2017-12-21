@@ -81,12 +81,22 @@ export const fetchMyReviews = () => async dispatch => {
   dispatch({ type: RECEIVE_MY_REVIEWS, payload: res.data });
 };
 
-export const fetchAllReviews = () => async dispatch => {
+export const fetchTopReviews = () => async dispatch => {
   dispatch({ type: FETCH_REVIEWS });
 
-  const res = await axios.get('/api/allReviews');
+  const res = await axios.get('/api/topReviews');
 
-  dispatch({ type: RECEIVE_REVIEWS, payload: res.data });
+  const reviewsWithAvgScore = res.data.map(review => {
+    const totalScore = review.ratings.reduce((a, b) => a + b, 0);
+    const numScores = review.ratings.length;
+    const avgScore = totalScore / numScores;
+
+    return avgScore
+      ? { avgScore, numScores, ...review }
+      : { avgScore: 0, numScores, ...review };
+  });
+
+  dispatch({ type: RECEIVE_REVIEWS, payload: reviewsWithAvgScore });
 };
 
 export const fetchRecentReviews = () => async dispatch => {

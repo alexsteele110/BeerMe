@@ -64,8 +64,8 @@ module.exports = app => {
     res.send(reviews);
   });
 
-  app.get('/api/allReviews', async (req, res) => {
-    const reviews = await Review.find({});
+  app.get('/api/topReviews', async (req, res) => {
+    const reviews = await Stats.find({});
 
     res.send(reviews);
   });

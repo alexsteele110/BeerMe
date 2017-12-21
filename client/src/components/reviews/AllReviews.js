@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   paper: {
     padding: 16,
-    minHeight: 200
+    minHeight: 120
   },
   header: {
     display: 'flex',
@@ -30,7 +30,10 @@ const styles = theme => ({
 });
 
 class AllReviews extends Component {
-  state = { activeStep: 0 };
+  state = {
+    activeStep: 0,
+    filter: 'numScores'
+  };
 
   handleNext = () => {
     this.setState({
@@ -44,17 +47,29 @@ class AllReviews extends Component {
     });
   };
 
-  renderReviews() {
+  renderReviews(filterCategory) {
     const { data } = this.props.reviews;
     const { activeStep } = this.state;
-    const steppedData = data.slice(activeStep * 6, (activeStep + 1) * 6);
+    const filterData = data.sort(
+      (a, b) => b[filterCategory] - a[filterCategory]
+    );
+    const steppedData = filterData.slice(activeStep * 6, (activeStep + 1) * 6);
 
     return steppedData.map(review => {
       const { classes } = this.props;
       return (
         <Grid item xs={12} md={6} key={review._id}>
           <Paper className={classes.paper}>
-            {review.beerName}
+            <Typography type="headline">
+              {review.beerName}
+            </Typography>
+            <Typography type="subheading">
+              Number of favorites: {review.numFavs}
+              <br />
+              Average user score: {review.avgScore}
+              <br />
+              Number of reviews: {review.ratings.length}
+            </Typography>
           </Paper>
         </Grid>
       );
@@ -104,7 +119,7 @@ class AllReviews extends Component {
             }
           />
         </Grid>
-        {this.renderReviews()}
+        {this.renderReviews(this.state.filter)}
       </Grid>
     );
   }

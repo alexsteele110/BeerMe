@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchAllReviews } from '../../actions';
+import { fetchTopReviews } from '../../actions';
 import AllReviews from './AllReviews';
 
 class ReviewPage extends Component {
   componentDidMount() {
-    this.props.fetchAllReviews();
+    this.props.fetchTopReviews();
   }
 
   render() {
@@ -17,4 +17,4 @@ class ReviewPage extends Component {
   }
 }
 
-export default connect(null, { fetchAllReviews })(ReviewPage);
+export default connect(null, { fetchTopReviews })(ReviewPage);
