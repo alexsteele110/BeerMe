@@ -9,7 +9,7 @@ export default (ChildComponent, category) => {
       const { isFetching, data } = this.props[category];
 
       if (auth === null || isFetching) {
-        return <CircularProgress />;
+        return <CircularProgress size={70} style={{ margin: '5% 48%' }} />;
       }
       if (data.length === 0) {
         return <h4>No results</h4>;

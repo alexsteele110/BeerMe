@@ -94,7 +94,7 @@ class Landing extends Component {
           </Typography>
           <Button
             component={Link}
-            to="/reviews"
+            to="/topReviews"
             className={classes.button}
             raised
             color="inherit"

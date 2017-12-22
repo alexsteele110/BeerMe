@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchTopReviews } from '../../actions';
-import AllReviews from './AllReviews';
+import TopReviews from './TopReviews';
 
 class ReviewPage extends Component {
   componentDidMount() {
@@ -11,7 +11,7 @@ class ReviewPage extends Component {
   render() {
     return (
       <div>
-        <AllReviews />
+        <TopReviews />
       </div>
     );
   }
