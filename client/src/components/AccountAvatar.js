@@ -57,7 +57,7 @@ class AccountAvatar extends Component {
           >
             My account
           </MenuItem>
-          <MenuItem onClick={this.handleRequestClose}>Settings</MenuItem>
+
           <MenuItem>
             <a className={classes.link} href="/api/logout">
               Logout

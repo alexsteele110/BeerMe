@@ -44,6 +44,14 @@ class FavoritesList extends Component {
       return <h3>Loading...</h3>;
     }
 
+    if (data.length === 0) {
+      return (
+        <Typography type="headline">
+          Start searching to add to your favorites!
+        </Typography>
+      );
+    }
+
     return data.map(favorite => {
       return (
         <ListItem

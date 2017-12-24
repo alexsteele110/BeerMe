@@ -56,8 +56,7 @@ const styles = theme => ({
   rating: {
     float: 'right',
     color: '#EC8C19',
-    marginTop: -70,
-    marginRight: 16
+    marginRight: 20
   }
 });
 
@@ -102,10 +101,17 @@ class BeerCard extends Component {
       <Grid container justify="space-between" spacing={24}>
         <Grid item xs={12} md={5}>
           <Card>
-            <CardHeader title={data.name} subheader={data.breweries[0].name} />
-            <div>
-              {this.getUserRating()}
-            </div>
+            <Grid container spacing={24}>
+              <Grid item xs={7}>
+                <CardHeader
+                  title={data.name}
+                  subheader={data.breweries[0].name}
+                />
+              </Grid>
+              <Grid item xs={5}>
+                {this.getUserRating()}
+              </Grid>
+            </Grid>
             <CardMedia
               className={classes.media}
               image={data.labels ? data.labels.large : altImage}

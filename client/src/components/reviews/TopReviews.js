@@ -17,8 +17,11 @@ import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
 
 const styles = theme => ({
   root: {
-    padding: '7%',
-    flexGrow: 1
+    padding: '3%',
+    flexGrow: 1,
+    [theme.breakpoints.up('lg')]: {
+      padding: '6% 12%'
+    }
   },
   container: {
     display: 'flex',
@@ -80,7 +83,7 @@ class TopReviews extends Component {
             input={<Input name="filter" id="filter" />}
           >
             <MenuItem value="avgScore">Top rating</MenuItem>
-            <MenuItem value="numScores">Most ratings</MenuItem>
+            <MenuItem value="numScores">Most reviews</MenuItem>
             <MenuItem value="numFavs">Most favorites</MenuItem>
           </Select>
         </FormControl>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
@@ -51,7 +50,7 @@ class BeersList extends Component {
     return list.data.map(beer => {
       return (
         <Grid item xs={12} key={beer.id}>
-          <Link to={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
+          <a href={`/beer/${beer.id}`} style={{ textDecoration: 'none' }}>
             <Card className={classes.card}>
               <div className={classes.details}>
                 <CardContent className={classes.content}>
@@ -73,7 +72,7 @@ class BeersList extends Component {
                 alt="hello"
               />
             </Card>
-          </Link>
+          </a>
         </Grid>
       );
     });
