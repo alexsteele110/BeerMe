@@ -28,7 +28,8 @@ const styles = {
     marginLeft: -2
   },
   description: {
-    marginTop: 16
+    marginTop: 16,
+    whiteSpace: 'pre-wrap'
   }
 };
 
@@ -66,14 +67,12 @@ class ReviewsList extends Component {
               {review.description}
             </Typography>
             <Divider className={classes.divider} />
-            <Grid container>
-              <Grid item xs={12}>
-                <Typography type="caption">
-                  <b>{review.displayName}</b> on {dateCreated}
-                  {auth ? <ThumbsUp review={review} /> : ''}
-                </Typography>
-              </Grid>
-            </Grid>
+
+            <Typography type="caption">
+              <b>{review.displayName}</b> on {dateCreated}
+            </Typography>
+
+            {auth ? <ThumbsUp review={review} /> : ''}
           </Paper>
         </Grid>
       );

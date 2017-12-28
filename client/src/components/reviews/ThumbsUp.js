@@ -9,18 +9,12 @@ import ThumbUpIcon from 'material-ui-icons/ThumbUp';
 const styles = theme => ({
   liked: {
     color: '#64b5f6',
-    marginLeft: '90%',
-    marginTop: -44,
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: '85%'
-    }
+    float: 'right',
+    marginTop: -53
   },
   unLiked: {
-    marginLeft: '90%',
-    marginTop: -44,
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: '85%'
-    }
+    float: 'right',
+    marginTop: -53
   },
   number: {
     marginLeft: 10
