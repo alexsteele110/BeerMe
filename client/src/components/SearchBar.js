@@ -9,15 +9,15 @@ import SearchIcon from 'material-ui-icons/Search';
 
 const styles = theme => ({
   container: {
-    display: 'flex',
-    marginRight: 34
+    display: 'flex'
   },
   input: {
     margin: theme.spacing.unit,
-    width: '80%',
+    width: '70%',
     backgroundColor: '#78909C',
     color: 'white',
     paddingLeft: 36,
+    paddingRight: -10,
     '&:hover': {
       backgroundColor: '#90A4AE'
     }
@@ -63,11 +63,9 @@ class SearchBar extends Component {
             }}
           />
         </form>
-        {this.props.results.fireRedirect && location !== '/search' ? (
-          <Redirect to={'/search'} />
-        ) : (
-          ''
-        )}
+        {this.props.results.fireRedirect && location !== '/search'
+          ? <Redirect to={'/search'} />
+          : ''}
       </div>
     );
   }

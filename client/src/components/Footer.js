@@ -27,7 +27,7 @@ function Footer(props) {
           color="inherit"
           gutterBottom={true}
         >
-          Put something important here
+          Made with React, Node, and MongoDB
         </Typography>
         <Typography
           type="subheading"

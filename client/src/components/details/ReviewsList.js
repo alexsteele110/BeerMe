@@ -66,10 +66,14 @@ class ReviewsList extends Component {
               {review.description}
             </Typography>
             <Divider className={classes.divider} />
-            <Typography type="caption">
-              <b>{review.displayName}</b> on {dateCreated}
-              {auth ? <ThumbsUp review={review} /> : ''}
-            </Typography>
+            <Grid container>
+              <Grid item xs={12}>
+                <Typography type="caption">
+                  <b>{review.displayName}</b> on {dateCreated}
+                  {auth ? <ThumbsUp review={review} /> : ''}
+                </Typography>
+              </Grid>
+            </Grid>
           </Paper>
         </Grid>
       );

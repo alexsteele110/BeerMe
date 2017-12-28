@@ -5,6 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import withLoader from '../hocs/withLoader';
 import Typography from 'material-ui/Typography';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import BeersList from '../BeersList';
 import glasses from './glasses';
@@ -12,10 +13,15 @@ import glasses from './glasses';
 const styles = theme => ({
   card: {
     maxWidth: 340,
-    marginTop: 120
+    marginTop: 80
   },
   media: {
     height: 200
+  },
+  paper: {
+    marginTop: 80,
+    padding: 16,
+    textAlign: 'center'
   }
 });
 
@@ -47,11 +53,6 @@ class Suggestions extends Component {
               <Typography type="headline" component="h2">
                 Drink in a {glasses[glasswareId].name}
               </Typography>
-              <Typography component="p">
-                A short-stemmed glass with a wide bottom and narrow top.
-                Typically used for spirits like bourbon and brandy, it is also
-                the correct choice for many beers over 8% ABV.
-              </Typography>
             </CardContent>
           </Card>
         </div>
@@ -60,7 +61,9 @@ class Suggestions extends Component {
 
     return (
       <div>
-        <Typography type="headline">No glass recommended</Typography>
+        <Paper className={classes.paper}>
+          <Typography type="display1">No glass recommended</Typography>
+        </Paper>
       </div>
     );
   }

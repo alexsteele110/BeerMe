@@ -19,7 +19,7 @@ const styles = theme => ({
     flex: 1
   },
   logo: {
-    marginLeft: 20,
+    marginLeft: 10,
     textDecoration: 'none',
     color: 'white'
   },

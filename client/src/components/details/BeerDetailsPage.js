@@ -28,7 +28,7 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 50,
+    marginTop: 70,
     backgroundColor: '#CFD8DC',
     [theme.breakpoints.up('lg')]: {
       margin: '6% 12%'

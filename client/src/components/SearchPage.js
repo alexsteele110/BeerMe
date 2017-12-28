@@ -2,18 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
 import BeersList from './BeersList';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    margin: '5%'
-  },
-  paper: {
-    padding: 16,
-    textAlign: 'center',
-    color: theme.palette.text.secondary
+    margin: '5%',
+    [theme.breakpoints.down('sm')]: {
+      margin: 0
+    }
   }
 });
 
@@ -22,11 +19,8 @@ function SearchPage(props) {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>Filters component</Paper>
-        </Grid>
-        <Grid item xs={8}>
+      <Grid container spacing={24} justify="space-around">
+        <Grid item xs={12} md={8}>
           <BeersList listType="results" />
         </Grid>
       </Grid>

@@ -9,6 +9,7 @@ import AccountCircleIcon from 'material-ui-icons/AccountCircle';
 const styles = {
   avatar: {
     marginRight: 36,
+    marginLeft: 36,
     height: 36,
     width: 36,
     color: '#fff'
