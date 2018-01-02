@@ -38,22 +38,22 @@ class ReviewsList extends Component {
     const { data } = this.props.reviews;
 
     return data.map(review => {
-      const { classes, auth, showName } = this.props;
+      const { classes, auth, showName, showThumb } = this.props;
       const dateCreated = new Date(review.dateCreated).toLocaleDateString();
 
       return (
         <Grid item xs={12} md={6} key={review._id}>
           <Paper className={classes.paper}>
-            {showName
-              ? <Typography type="subheading">
-                  <b>
-                    {review.beerName}
-                  </b>
-                  <Link to={`/beer/${review.beerId}`}>
-                    <Typography type="caption">( see beer details )</Typography>
-                  </Link>
-                </Typography>
-              : ''}
+            {showName ? (
+              <Typography type="subheading">
+                <b>{review.beerName}</b>
+                <Link to={`/beer/${review.beerId}`}>
+                  <Typography type="caption">( see beer details )</Typography>
+                </Link>
+              </Typography>
+            ) : (
+              ''
+            )}
 
             <Rating
               className={classes.star}
@@ -72,7 +72,7 @@ class ReviewsList extends Component {
               <b>{review.displayName}</b> on {dateCreated}
             </Typography>
 
-            {auth ? <ThumbsUp review={review} /> : ''}
+            {auth && showThumb ? <ThumbsUp review={review} /> : ''}
           </Paper>
         </Grid>
       );

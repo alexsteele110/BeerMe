@@ -68,13 +68,9 @@ class Landing extends Component {
           <div className={classes.container}>
             <Icon style={{ color }} className={classes.largeIcon} />
             <Typography type="headline" gutterBottom>
-              <b>
-                {name}
-              </b>
+              <b>{name}</b>
             </Typography>
-            <Typography type="subheading">
-              {description}
-            </Typography>
+            <Typography type="subheading">{description}</Typography>
           </div>
         </Grid>
       );
@@ -111,7 +107,7 @@ class Landing extends Component {
             </Grid>
             <Grid item xs={12}>
               <Typography type="display1">Recent reviews</Typography>
-              <ReviewsList showName={true} />
+              <ReviewsList showName={true} showThumb={true} />
             </Grid>
           </Grid>
         </div>

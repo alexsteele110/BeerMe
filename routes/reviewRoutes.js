@@ -61,7 +61,11 @@ module.exports = app => {
     const _user = req.user.id;
     const reviews = await Review.find({ _user });
 
-    res.send(reviews);
+    const recentReviews = reviews.sort(
+      (a, b) => new Date(b.dateCreated) - new Date(a.dateCreated)
+    );
+
+    res.send(recentReviews);
   });
 
   app.get('/api/topReviews', async (req, res) => {

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import requireAuth from '../hocs/requireAuth';
+import { fetchMyReviews } from '../../actions';
+import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import FavoritesList from './FavoritesList';
+import ReviewsList from '../details/ReviewsList';
 
 const styles = theme => ({
   root: {
@@ -17,22 +20,33 @@ const styles = theme => ({
   }
 });
 
-function DashboardPage(props) {
-  const { classes } = props;
+class DashboardPage extends Component {
+  componentDidMount() {
+    this.props.fetchMyReviews();
+  }
 
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={12} md={6}>
-          <FavoritesList />
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <Grid container spacing={24}>
+          <Grid item xs={12} md={6}>
+            <FavoritesList />
+          </Grid>
+          <Grid item xs={12}>
+            <ReviewsList showName={true} />
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 DashboardPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(requireAuth(DashboardPage));
+export default connect(null, { fetchMyReviews })(
+  withStyles(styles)(requireAuth(DashboardPage))
+);
